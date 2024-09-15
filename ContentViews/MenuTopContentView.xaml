@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cronos.ContentViews.MenuTopContentView"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels">
+    <ContentView.BindingContext>
+        <viewmodel:NavegacaoViewModel />
+    </ContentView.BindingContext>
+    <!-- MENU SUPERIOR -->
+    <Frame Padding="0"
+           CornerRadius="0"
+           HeightRequest="100"
+           BackgroundColor="#252525"
+           BorderColor="Transparent">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <!-- Logo menu superior -->
+            <Image Grid.Column="0"
+                   MaximumHeightRequest="60"
+                   Aspect="AspectFit"
+                   Margin="30,0,0,0"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center">
+                <Image.Source>
+                    <UriImageSource Uri="{Binding LogoMenuSuperiro}"
+                                    CachingEnabled="False"
+                                    CacheValidity="1" />
+                </Image.Source>
+            </Image>
+            <StackLayout Grid.Column="1"
+                         Orientation="Horizontal"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"
+                         Margin="0,0,30,0">
+                <Grid cursores:CursorBehavior.Cursor="Hand">
+                    <!-- Sino notificações -->
+                    <Label Text="&#xe932;"
+                           FontSize="25"
+                           FontFamily="icons"
+                           TextColor="#8A8A8A"
+                           Margin="0,5,0,0"
+                           VerticalTextAlignment="Center">
+                    </Label>
+                    <!-- Alerta do sino -->
+                    <Path IsVisible="True"
+                          Fill="#EB9C25"
+                          Stroke="#252525"
+                          Margin="10,0,0,5">
+                        <Path.Data>
+                            <EllipseGeometry Center="10,7"
+                                             RadiusX="5"
+                                             RadiusY="5" />
+                        </Path.Data>
+                    </Path>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Btn_ShowNotificacoesPage}" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+                <VerticalStackLayout Margin="20,0,10,0">
+                    <!-- Nome do usuário -->
+                    <Label Text="{Binding NomeUsuarioMenu}"
+                           FontSize="11"
+                           FontFamily="PoppinsSemiBold"
+                           TextColor="White"
+                           Margin="0,0,0,-2"
+                           HorizontalTextAlignment="End" />
+                    <!-- E-mail do usuário -->
+                    <Label Text="{Binding EmailUsuarioMenu}"
+                           FontSize="9"
+                           FontFamily="PoppinsLight"
+                           TextColor="White"
+                           HorizontalTextAlignment="End" />
+                </VerticalStackLayout>
+                <Frame CornerRadius="2"
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       Padding="0"
+                       BorderColor="#8E8E8E"
+                       BackgroundColor="#8E8E8E"
+                       IsClippedToBounds="True"
+                       cursores:CursorBehavior.Cursor="Hand">
+                    <Grid>
+                        <Label Text="&#xe93a;"
+                               FontSize="20"
+                               FontFamily="icons"
+                               TextColor="White"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+                        <!-- Imagem avatar do usuário -->
+                        <Image Aspect="AspectFit" Margin="-10">
+                            <Image.Source>
+                                <UriImageSource Uri="{Binding AvatarUsuarioMenu}"
+                                                CachingEnabled="False"
+                                                CacheValidity="1" />
+                            </Image.Source>
+                        </Image>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Btn_ShowConfiguracoesGerais}" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

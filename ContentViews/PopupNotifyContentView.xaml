@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cronos.ContentViews.PopupNotifyContentView"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels">
+    <ContentView.BindingContext>
+        <viewmodel:NavegacaoViewModel />
+    </ContentView.BindingContext>
+    <!-- POPUP NOTIFICAÇÕES -->
+    <Frame Grid.Row="1"
+           IsVisible="{Binding PopupNotificacaoVisivel}"
+           BackgroundColor="White"
+           BorderColor="#4B4B4B"
+           VerticalOptions="Start"
+           HorizontalOptions="End"
+           Margin="0,0,130,0"
+           WidthRequest="200"
+           HeightRequest="200"
+           HasShadow="True"
+           CornerRadius="5"
+           Padding="0">
+        <Grid Margin="20,15,10,20">
+            <Label Text="Notificações"
+                   FontSize="14"
+                   TextColor="#1F1F1F"
+                   FontFamily="PoppinsSemiBold" />
+            <ScrollView Margin="0,25,0,20">
+                <StackLayout Margin="0,0,20,10">
+                    <!-- Mensagens de texto das Notificações -->
+                    <CollectionView ItemsSource="{Binding Notificacoes}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label Text="{Binding .}"
+                                           Margin="0,2"
+                                           LineHeight="1"
+                                           FontSize="11"
+                                           FontFamily="PoppinsRegular"
+                                           TextColor="#1F1F1F"
+                                           HorizontalTextAlignment="Start" />
+                                    <BoxView WidthRequest="60"
+                                             HeightRequest="2"
+                                             Color="#1F1F1F"
+                                             Opacity="0.1"
+                                             Margin="0,5,0,5"
+                                             CornerRadius="20"
+                                             HorizontalOptions="Start" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+            <!-- Button Ver todas Notificações -->
+            <Label ClassId="BtnPage9"
+                   VerticalOptions="End"
+                   HorizontalOptions="Start"
+                   cursores:CursorBehavior.Cursor="Hand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Ver Todas "
+                              FontSize="11"
+                              FontFamily="PoppinsBold"
+                              TextColor="#1F1F1F" />
+                        <Span Text="&#xe90a;"
+                              FontSize="10"
+                              FontAttributes="Bold"
+                              FontFamily="icons"
+                              TextColor="#1F1F1F" />
+                    </FormattedString>
+                </Label.FormattedText>
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding Btn_ShowNotificacoesPage}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+    </Frame>
+</ContentView>

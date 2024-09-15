@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="Cronos.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+       xmlns:menutop="clr-namespace:Cronos.ContentViews"
+       xmlns:views="clr-namespace:Cronos.Views"
+       NavigationPage.HasNavigationBar="False"
+       FlyoutBackgroundColor="Transparent"
+       Shell.FlyoutBehavior="Locked"
+       Shell.TabBarIsVisible="False"
+       Shell.NavBarIsVisible="False"
+       FlyoutHeaderBehavior="Fixed"
+       FlyoutWidth="75">
+
+    <ShellContent Title="MainPage"
+                  ContentTemplate="{DataTemplate views:MainPage}"
+                  Route="MainPage" />
+
+    <Shell.FlyoutHeader>
+        <Frame BackgroundColor="#1f1f1f"
+               BorderColor="#1f1f1f"
+               CornerRadius="0"
+               Padding="0,20,0,0">
+            <!-- Logo esquerdo -->
+            <Image Aspect="AspectFit"
+                   MaximumWidthRequest="60"
+                   MaximumHeightRequest="60"
+                   Margin="0,0,5,0">
+                <Image.Source>
+                    <UriImageSource Uri="{Binding LogoMenuEsquerdo}"
+                                    CachingEnabled="False"
+                                    CacheValidity="1" />
+                </Image.Source>
+            </Image>
+        </Frame>
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutContentTemplate>
+        <DataTemplate>
+            <Frame BackgroundColor="#1f1f1f"
+                   BorderColor="#1f1f1f"
+                   CornerRadius="0"
+                   Padding="0">
+                <ScrollView Orientation="Vertical"
+                            Margin="0,20,0,0"
+                            VerticalScrollBarVisibility="Never">
+                    <Grid>
+                        <!-- Button DashBoard -->
+                        <Grid VerticalOptions="Center"
+                              RowDefinitions="*,*,*,*,*,*,*,*">
+                            <Grid Grid.Row="0" 
+                                  HeightRequest="35"
+                                Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha1}"/>
+                                <Label Text="&#xe901;"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       x:Name="TxtIcon1"
+                                       ToolTipProperties.Text="DashBoard"
+                                       TextColor="{Binding IconsCor1}"
+                                       Style="{StaticResource BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_ShowDashboard}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <!-- Button Equipamentos -->
+                            <Grid  Grid.Row="1"
+                                   HeightRequest="35"
+                                   Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha2}" />
+                                <Label Text="&#xe902;"
+                                       x:Name="TxtIcon2"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       ToolTipProperties.Text="Equipamentos"
+                                       TextColor="{Binding IconsCor2}"
+                                       Style="{StaticResource  BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_ShowEquipamentos}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <!-- Button Registrar Informações sobre o equipamento -->
+                            <Grid  Grid.Row="2"
+                                   HeightRequest="35"
+                                   Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha3}" />
+                                <Label Text="&#xe903;"
+                                       x:Name="TxtIcon3"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       ToolTipProperties.Text="Inserir informações do equipamento"
+                                       TextColor="{Binding IconsCor3}"
+                                       Style="{StaticResource  BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_ShowInserirInformacoesEquipamento}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <!-- Button Registro Histórico -->
+                            <Grid  Grid.Row="3"
+                                   HeightRequest="35"
+                                   Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha4}" />
+                                <Label Text="&#xe904;"
+                                       x:Name="TxtIcon4"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       ToolTipProperties.Text="Histórico"
+                                       TextColor="{Binding IconsCor4}"
+                                       Style="{StaticResource  BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_ShowHistorico}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <!-- Button Criar nova conta de usuário -->
+                            <Grid  Grid.Row="4"
+                                   HeightRequest="35"
+                                   Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha5}" />
+                                <Label Text="&#xe905;"
+                                       x:Name="TxtIcon5"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       ToolTipProperties.Text="Criar conta"
+                                       TextColor="{Binding IconsCor5}"
+                                       Style="{StaticResource  BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_ShowCriarConta}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <!-- Button Empresas cadastradas -->
+                            <Grid  Grid.Row="5"
+                                   HeightRequest="35"
+                                   Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha6}" />
+                                <Label Text="&#xe906;"
+                                       x:Name="TxtIcon6"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       ToolTipProperties.Text="Configurações da empresa"
+                                       TextColor="{Binding IconsCor6}"
+                                       Style="{StaticResource  BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_ShowConfiguracaoEmpresa}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <!-- Button Configurações -->
+                            <Grid  Grid.Row="6"
+                                   HeightRequest="35"
+                                  Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha7}" />
+                                <Label Text="&#xe907;"
+                                       x:Name="TxtIcon7"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       ToolTipProperties.Text="Configurações gerais"
+                                       TextColor="{Binding IconsCor7}"
+                                       Style="{StaticResource  BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_ShowConfiguracoesGerais}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            <!-- Button Sobre/Ajuda -->
+                            <Grid  Grid.Row="7"
+                                   HeightRequest="35"
+                                   Style="{StaticResource BtnMenuLatGrid}">
+                                <BoxView Style="{StaticResource BtnMenuLatBoxViewLinha}"
+                                         IsVisible="{Binding IconLinha8}" />
+                                <Label Text="&#xe908;"
+                                       x:Name="TxtIcon8"
+                                       IsEnabled="{Binding EstadoButtons}"
+                                       ToolTipProperties.Text="Ajuda"
+                                       TextColor="{Binding IconsCor8}"
+                                       Style="{StaticResource  BtnMenuLatLabel}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding  Btn_ShowAjuda}" />
+                                        <PointerGestureRecognizer PointerEntered="BtnMenuEntered"
+                                                                  PointerExited="BtnMenuExited" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+                            </Grid>
+                  
+                    </Grid>
+                </ScrollView>
+            </Frame>
+        </DataTemplate>
+    </Shell.FlyoutContentTemplate>
+
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <Frame BackgroundColor="#1f1f1f"
+                   BorderColor="#1f1f1f"
+                   CornerRadius="0"
+                   Padding="0">
+                <StackLayout Margin="10">
+                    <Label Text="Cronos"
+                           FontSize="12"
+                           TextColor="#8a8a8a"
+                           FontFamily="PoppinsSemiBold"
+                           HorizontalOptions="Start" />
+                    <Label Text="1.0.0"
+                           FontSize="12"
+                           TextColor="#8a8a8a"
+                           HorizontalOptions="Start" />
+                </StackLayout>
+            </Frame>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+</Shell>

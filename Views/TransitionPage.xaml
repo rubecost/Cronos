@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:menutop="clr-namespace:Cronos.ContentViews"
+             x:Class="Cronos.Views.TransitionPage"
+             BackgroundColor="#252525">
+
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <menutop:MenuTopContentView />
+            </ContentView>
+            <StackLayout Grid.Row="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <Image Source="loading_cronos.png"
+                       WidthRequest="80"
+                       Margin="0,0,0,10"
+                       Aspect="AspectFit"
+                       x:Name="LoadingIcon" />
+                <!-- Loading -->
+                <ActivityIndicator Color="white"
+                                   IsRunning="True"
+                                   Scale="0.6" />
+            </StackLayout>
+
+        </Grid>
+    </Frame>
+</ContentPage>

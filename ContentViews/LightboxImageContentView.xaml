@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cronos.ContentViews.LightboxImageContentView"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             BackgroundColor="Black">
+    <Grid>
+    <ScrollView>
+        <Grid>
+            <!-- Imagem expandida -->
+                <Image Source="{Binding ImagemSelecionada}"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+            </Grid>
+    </ScrollView>
+        <!-- Botão fechar no canto superior direito -->
+
+        <Label Text="&#xe900;"
+               FontFamily="icons"
+               FontSize="30"
+               Margin="0,20,30,0"
+               TextColor="White"
+               HorizontalOptions="End"
+               VerticalOptions="Start"
+               cursores:CursorBehavior.Cursor="Hand">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Btn_FecharImagem}" />
+            </Label.GestureRecognizers>
+            <Label.Shadow>
+                <Shadow Offset="2,2"
+                        Brush="Black"
+                        Radius="5" />
+            </Label.Shadow>
+        </Label>
+    </Grid>
+</ContentView>

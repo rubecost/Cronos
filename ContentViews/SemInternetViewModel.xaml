@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             x:Class="Cronos.ContentViews.SemInternetViewModel"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows">
+
+    <Grid IsVisible="{Binding SemInternet}"
+          RowDefinitions="*,400,*">
+        <BoxView Style="{StaticResource BoxViewStyle}"
+                 Grid.RowSpan="3" />
+        <skia:SKLottieView Style="{StaticResource LottieViewStyle}"
+                           Grid.Row="1"
+                           IsAnimationEnabled="{Binding SemInternet}"/>
+        <StackLayout Grid.Row="1"
+                     Margin="0,230,0,0">
+            <Label Style="{StaticResource LabelTitleStyle}" />
+            <Label Style="{StaticResource LabelSubtitleStyle}" />
+            <Button Style="{StaticResource ButtonStyle}"
+                    BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                    Command="{Binding Btn_AvisoSemInternet}" />
+        </StackLayout>
+    </Grid>
+</ContentView>

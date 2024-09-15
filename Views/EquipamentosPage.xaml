@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels"
+             x:Class="Cronos.Views.EquipamentosPage">
+
+    <ContentPage.BindingContext>
+        <viewmodel:EquipamentosViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView >
+                    <StackLayout Margin="20">
+                        <Label Text="Equipamentos"
+                               FontSize="18"
+                               FontFamily="PoppinsSemiBold"
+                               TextColor="White"
+                               HorizontalTextAlignment="Start"
+                               SemanticProperties.HeadingLevel="Level1" />
+                        <Label Text="Equipamentos "
+                               FontSize="9"
+                               TextColor="#8A8A8A"
+                               FontFamily="PoppinsLight"
+                               HorizontalTextAlignment="Start" />
+
+                        <Frame BackgroundColor="#252525"
+                               Padding="0"
+                               CornerRadius="2"
+                               Margin="0,10,0,0"
+                               BorderColor="Transparent"
+                               HeightRequest="500">
+                            <Grid>
+                                <BoxView HeightRequest="5"
+                                         VerticalOptions="Start"
+                                         Margin="0,25,0,0"
+                                         Color="#1f1f1f" />
+                                <!-- BUTTONS DE NAVEGAÇÃO -->
+                                <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="End"
+                                             Margin="0,5,20,10">
+                                    <!-- Ver resultados anteriores -->
+                                    <Label VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Margin="0,0,10,0"
+                                           Text="&#xe947; Anterior"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_CarregarMaisOuMenosDados}"
+                                                                  CommandParameter="MenosDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <!-- Ver próximos resultados -->
+                                    <Label IsVisible="True"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Text="Próximo &#xe946;"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_CarregarMaisOuMenosDados}"
+                                                                  CommandParameter="MaisDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+
+                                <ScrollView Orientation="Horizontal"
+                                            HorizontalScrollBarVisibility="Always"
+                                            Margin="20,50,20,20">
+                                    <Grid RowSpacing="10"
+                                          Margin="0,0,0,20"
+                                          ColumnDefinitions="175,200,175,120,120,120,175,150,175,100,200,200,200,200,200">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Text="TAG"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="1"
+                                               Text="Localização"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="2"
+                                               Text="Situação"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="3"
+                                               Text="Status NR-13"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="4"
+                                               Text="Status Manômetros"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="5"
+                                               Text="Status Válvulas de Segurança/Alívio"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="6"
+                                               Text="Status última Recomendação"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="7"
+                                               Text="Classe de Fluido"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="8"
+                                               Text="Grupo potencial de Risco"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="9"
+                                               Text="Categoria"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="10"
+                                               Text="Volume (m³)"
+                                               FontSize="12"
+                                               Margin="7,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="11"
+                                               Text="PMTA"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="12"
+                                               Text="Pressão Teste Hidrostático"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="13"
+                                               Text="Fluido"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="14"
+                                               Text="Pressão Máxima"
+                                               FontSize="12"
+                                               Margin="5,0,0,0"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular"
+                                               x:Name="ola" />
+                                        <!-- Lista de informações dos equipamentos -->
+                                        <CollectionView Grid.Row="1"
+                                                        Grid.ColumnSpan="15"
+                                                        ItemsSource="{Binding Equipamentos}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Frame BackgroundColor="Transparent"
+                                                           BorderColor="Transparent"
+                                                           CornerRadius="3"
+                                                           Padding="0">
+                                                        <Frame.GestureRecognizers>
+                                                            <PointerGestureRecognizer PointerEntered="OnPointerEntered"
+                                                                                      PointerExited="OnPointerExited" />
+                                                        </Frame.GestureRecognizers>
+                                                        <Grid ColumnDefinitions="175,200,175,120,120,120,175,150,175,100,200,200,200,200,200"
+                                                              cursores:CursorBehavior.Cursor="Hand">
+                                                            <Grid.GestureRecognizers>
+                                                                <!-- Comando de tap ajustado para acessar o ViewModel -->
+                                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:EquipamentosViewModel}}, Path=Btn_AbrirOpcoes}"
+                                                                                      CommandParameter="{Binding Tag}" />
+
+                                                            </Grid.GestureRecognizers>
+
+                                                            <Frame Grid.Column="0"
+                                                                   Margin="2,0,0,0"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Tag}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="1"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Localizacao}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="2"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Status_Equipamento}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="3"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Status_Inspecao_Nr13}"
+                                                                       FontFamily="PoppinsSemiBold">
+                                                                    <Label.Triggers>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Status_Inspecao_Nr13}"
+                                                                                     Value="NO PRAZO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Green" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Status_Inspecao_Nr13}"
+                                                                                     Value="VENCIDO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Red" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Status_Inspecao_Nr13}"
+                                                                                     Value="VENCENDO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Yellow" />
+                                                                        </DataTrigger>
+                                                                    </Label.Triggers>
+                                                                </Label>
+                                                            </Frame>
+                                                            <Frame Grid.Column="4"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Manometro_Status_Operacional}"
+                                                                       FontFamily="PoppinsSemiBold">
+                                                                    <Label.Triggers>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Manometro_Status_Operacional}"
+                                                                                     Value="NO PRAZO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Green" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Manometro_Status_Operacional}"
+                                                                                     Value="VENCIDO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Red" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Manometro_Status_Operacional}"
+                                                                                     Value="VENCENDO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Yellow" />
+                                                                        </DataTrigger>
+                                                                    </Label.Triggers>
+                                                                </Label>
+                                                            </Frame>
+                                                            <Frame Grid.Column="5"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Valvula_Status_Operacional}"
+                                                                       FontFamily="PoppinsSemiBold">
+                                                                    <Label.Triggers>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Valvula_Status_Operacional}"
+                                                                                     Value="NO PRAZO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Green" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Valvula_Status_Operacional}"
+                                                                                     Value="VENCIDO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Red" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Valvula_Status_Operacional}"
+                                                                                     Value="VENCENDO">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Yellow" />
+                                                                        </DataTrigger>
+                                                                    </Label.Triggers>
+                                                                </Label>
+                                                            </Frame>
+                                                            <Frame Grid.Column="6"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Status_Recomendacao}"
+                                                                       FontFamily="PoppinsSemiBold">
+                                                                    <Label.Triggers>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Status_Recomendacao}"
+                                                                                     Value="Atendida">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Green" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Status_Recomendacao}"
+                                                                                     Value="Não atendida">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Red" />
+                                                                        </DataTrigger>
+                                                                        <DataTrigger TargetType="Label"
+                                                                                     Binding="{Binding Status_Recomendacao}"
+                                                                                     Value="Parcialmente atendida">
+                                                                            <Setter Property="TextColor"
+                                                                                    Value="Yellow" />
+                                                                        </DataTrigger>
+                                                                    </Label.Triggers>
+                                                                </Label>
+                                                            </Frame>
+
+                                                            <Frame Grid.Column="7"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Classe_Fluido}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="8"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Grupo_Potencial_Risco}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="9"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Categoria}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="10"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Volume}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="11"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding PMTA}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="12"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Pressao_Teste_Hidrosatico}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="13"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Fluido}" />
+                                                            </Frame>
+                                                            <Frame Grid.Column="14"
+                                                                   Margin="0,0,4,0"
+                                                                   Style="{DynamicResource FrameEQPStyle}">
+                                                                <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                       Text="{Binding Pressao_Maxima}" />
+                                                            </Frame>
+                                                        </Grid>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </Grid>
+                                </ScrollView>
+
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+
+                <!-- LOADING DA PAGINA -->
+                <ContentView>
+                    <contentview:LoadingViewModel />
+                </ContentView>
+
+                <!-- SEM INTERNET -->
+                <ContentView>
+                    <contentview:SemInternetViewModel />
+                </ContentView>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

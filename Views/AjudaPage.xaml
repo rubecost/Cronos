@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodels="clr-namespace:Cronos.ViewModels"
+             x:Class="Cronos.Views.AjudaPage">
+
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView >
+                    <StackLayout Margin="20">
+                        <Label Text="Ajuda"
+                               FontSize="18"
+                               FontFamily="PoppinsSemiBold"
+                               TextColor="White"
+                               HorizontalTextAlignment="Start"
+                               SemanticProperties.HeadingLevel="Level1" />
+                        <Label Text="Ajuda "
+                               FontSize="9"
+                               TextColor="#8A8A8A"
+                               FontFamily="PoppinsLight"
+                               HorizontalTextAlignment="Start" />
+                    </StackLayout>
+                    
+                    
+                    
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

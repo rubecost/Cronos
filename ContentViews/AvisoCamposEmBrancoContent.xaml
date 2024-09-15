@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             x:Class="Cronos.ContentViews.AvisoCamposEmBrancoContent">
+    
+    <Grid x:Name="GrdAviso" 
+        Style="{StaticResource PopupGridStyle}">
+        <BoxView Style="{StaticResource PopupBoxViewStyle}" />
+        <Frame Style="{StaticResource PopupFrameStyle}"
+               MaximumHeightRequest="255">
+            <StackLayout Style="{StaticResource PopupStackLayoutStyle}">
+                <StackLayout Style="{StaticResource PopupInnerStackLayoutStyle}"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                    <Label Style="{StaticResource PopupTextLabelStyle}"
+                           Text="Aviso!" />
+                    <Label Text="Exceto a TAG de identificação do equipamento, caso algum outro campo, inclusive as datas, não precise ser preenchido, deixe-o em branco."
+                           FontSize="13"
+                           Margin="0,20,0,0"
+                           TextColor="White"
+                           FontFamily="PoppinsSemiBold"
+                           HorizontalTextAlignment="Center"/>
+                    <Button Text="OK"
+                            Margin="0,30,0,20"
+                            WidthRequest="100"
+                            HorizontalOptions="Center"
+                            BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                            cursores:CursorBehavior.Cursor="Hand"
+                            Clicked="BtnOK" />
+                    <Label Style="{StaticResource PopupIconLabelStyle}"
+                           cursores:CursorBehavior.Cursor="Hand"
+                           HorizontalOptions="Center"
+                           FontFamily="PoppinsRegular"
+                           Text="Não mostrar mais">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BtnNaoMostrarMais" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentView>

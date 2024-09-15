@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodels="clr-namespace:Cronos.ViewModels"
+             x:Class="Cronos.Views.ConfiguracaoEmpresaPage">
+    <ContentPage.BindingContext>
+        <viewmodels:ConfiguracaoEmpresaViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView >
+
+                    <StackLayout>
+                        <StackLayout Margin="20,20,20,0">
+                            <Label Text="Configurações da empresa"
+                                   FontSize="18"
+                                   FontFamily="PoppinsSemiBold"
+                                   TextColor="White"
+                                   HorizontalTextAlignment="Start"
+                                   SemanticProperties.HeadingLevel="Level1" />
+                            <Label Text="Configurações da empresa"
+                                   FontSize="9"
+                                   TextColor="#8A8A8A"
+                                   FontFamily="PoppinsLight"
+                                   HorizontalTextAlignment="Start" />
+                        </StackLayout>
+
+                        <StackLayout Margin="20,10,20,10">
+                            <Frame Padding="0"
+                                   BackgroundColor="#252525"
+                                   BorderColor="Transparent"
+                                   CornerRadius="2"
+                                   Margin="0,0,0,10">
+                                <Grid RowDefinitions="*"
+                                      ColumnDefinitions="*,*,*"
+                                      ColumnSpacing="20"
+                                      RowSpacing="10"
+                                      Margin="20">
+                                    <!-- COLUNA 1 -->
+                                    <Frame Grid.Column="0"
+                                           Padding="0"
+                                           CornerRadius="3"
+                                           BorderColor="Transparent"
+                                           BackgroundColor="#1F1F1F">
+                                        <StackLayout Margin="20">
+                                            <Grid ColumnDefinitions="auto,*"
+                                                  ColumnSpacing="20"
+                                                  Margin="0,0,0,20">
+                                                <Label Grid.Column="0"
+                                                       Text="&#xe92f;"
+                                                       FontFamily="icons"
+                                                       TextColor="#8A8A8A"
+                                                       FontSize="70"
+                                                       HorizontalTextAlignment="Start"
+                                                       VerticalTextAlignment="Start"
+                                                       cursores:CursorBehavior.Cursor="Hand" />
+                                                <StackLayout Grid.Column="1">
+                                                    <Label Text="Empresa"
+                                                           FontFamily="PoppinsSemiBold"
+                                                           FontSize="14"
+                                                           TextColor="#8A8A8A"
+                                                           Margin="0,10,0,5" />
+                                                    <!-- Exibe nome da empresa -->
+                                                    <Label Text="{Binding NomeEmpresaUI}"
+                                                           FontFamily="PoppinsSemiBold"
+                                                           FontSize="13"
+                                                           TextColor="White" />
+                                                </StackLayout>
+                                            </Grid>
+                                            <Label Text="Unidade Atual"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="14"
+                                                   TextColor="#8A8A8A"
+                                                   Margin="0,0,0,20" />
+                                            <!-- Exibir Unidade -->
+                                            <Label Text="Unidade:"
+                                                   FontFamily="PoppinsRegular"
+                                                   FontSize="12"
+                                                   TextColor="#8E8E8E" />
+                                            <Label Text="{Binding NomeUnidadeUI}"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="12"
+                                                   TextColor="White"
+                                                   Margin="0,0,0,5" />
+                                            <!-- Exibir Responsável -->
+                                            <Label Text="Responsável:"
+                                                   FontFamily="PoppinsRegular"
+                                                   FontSize="12"
+                                                   TextColor="#8E8E8E" />
+                                            <Label Text="{Binding ResponsavelUI}"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="12"
+                                                   TextColor="White"
+                                                   Margin="0,0,0,5" />
+                                            <!-- Exibir E-Mail -->
+                                            <Label Text="E-Mail:"
+                                                   FontFamily="PoppinsRegular"
+                                                   FontSize="12"
+                                                   TextColor="#8E8E8E" />
+                                            <Label Text="{Binding EmailUI}"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="12"
+                                                   TextColor="White"
+                                                   Margin="0,0,0,5" />
+                                            <Grid ColumnDefinitions="*,*">
+                                                <StackLayout Grid.Column="0">
+                                                    <!-- Exibir Telefone -->
+                                                    <Label Text="Telefone:"
+                                                           FontFamily="PoppinsRegular"
+                                                           FontSize="12"
+                                                           TextColor="#8E8E8E" />
+                                                    <Label Text="{Binding TelefoneUI}"
+                                                           FontFamily="PoppinsSemiBold"
+                                                           FontSize="12"
+                                                           TextColor="White"
+                                                           Margin="0,0,0,5" />
+                                                </StackLayout>
+                                                <StackLayout Grid.Column="1">
+                                                    <!-- Exibir Celular -->
+                                                    <Label Text="Celular:"
+                                                           FontFamily="PoppinsRegular"
+                                                           FontSize="12"
+                                                           TextColor="#8E8E8E" />
+                                                    <Label Text="{Binding CelularUI}"
+                                                           FontFamily="PoppinsSemiBold"
+                                                           FontSize="12"
+                                                           TextColor="White"
+                                                           Margin="0,0,0,5" />
+                                                </StackLayout>
+                                            </Grid>
+                                            <!-- Exibir Endereço Físico-->
+                                            <Label Text="Endereço Físico:"
+                                                   FontFamily="PoppinsRegular"
+                                                   FontSize="12"
+                                                   TextColor="#8E8E8E" />
+                                            <Label Text="{Binding EnderecoCompletoUI}"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="12"
+                                                   TextColor="White"
+                                                   Margin="0,0,0,5" />
+                                            <!-- Exibir Nome Setor atual -->
+                                            <Label Text="Setor Atual"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="14"
+                                                   TextColor="#8A8A8A"
+                                                   Margin="0,20,0,20" />
+                                            <Label Text="{Binding NomeSetorUI}"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="12"
+                                                   TextColor="White"
+                                                   Margin="0,0,0,50" />
+                                        </StackLayout>
+                                    </Frame>
+                                    <!-- COLUNA 2-->
+                                    <Frame Grid.Row="1"
+                                           Grid.Column="1"
+                                           Padding="0"
+                                           CornerRadius="3"
+                                           BorderColor="Transparent"
+                                           BackgroundColor="#1F1F1F">
+                                        <StackLayout Margin="20">
+                                            <Label Text="Criar nova unidade para essa&#10;empresa"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="14"
+                                                   TextColor="#8A8A8A" />
+                                            <!-- Entrada do Nome da Unidade -->
+                                            <Entry Placeholder="Unidade*"
+                                                   BackgroundColor="#252525"
+                                                   Keyboard="Text"
+                                                   MaxLength="100"
+                                                   Text="{Binding NomeUnidade}"
+                                                   Margin="0,20,0,10" />
+                                            <!-- Entrada do Logradouro -->
+                                            <Entry Placeholder="Logradouro*"
+                                                   BackgroundColor="#252525"
+                                                   Keyboard="Text"
+                                                   MaxLength="100"
+                                                   Text="{Binding Logradouro }" />
+                                            <!-- Entrada do nome do Responsavel -->
+                                            <Entry Placeholder="Responsável"
+                                                   BackgroundColor="#252525"
+                                                   Keyboard="Text"
+                                                   MaxLength="50"
+                                                   Text="{Binding Responsavel}"
+                                                   Margin="0,10,0,10" />
+                                            <Grid ColumnSpacing="10"
+                                                  ColumnDefinitions="*,*">
+                                                <!-- Entrada Numero endereço -->
+                                                <Entry Grid.Column="0"
+                                                       Placeholder="Numero*"
+                                                       BackgroundColor="#252525"
+                                                       Keyboard="Numeric"
+                                                       MaxLength="8"
+                                                       Text="{Binding Numero}" />
+                                                <!-- Entrada do CEP -->
+                                                <Entry Grid.Column="1"
+                                                       Placeholder="CEP*"
+                                                       BackgroundColor="#252525"
+                                                       Keyboard="Telephone"
+                                                       MaxLength="8"
+                                                       Text="{Binding CEP}" />
+                                            </Grid>
+                                            <!-- Entrada do E-Mail da Empresa -->
+                                            <Entry Placeholder="E-Mail"
+                                                   BackgroundColor="#252525"
+                                                   Keyboard="Email"
+                                                   MaxLength="200"
+                                                   IsSpellCheckEnabled="false"
+                                                   Text="{Binding Email }"
+                                                   Margin="0,10,0,10" />
+                                            <!-- Entrada do nome Bairro -->
+                                            <Entry Placeholder="Bairro"
+                                                   BackgroundColor="#252525"
+                                                   Keyboard="Text"
+                                                   MaxLength="60"
+                                                   Text="{Binding Bairro}" />
+                                            <Grid ColumnSpacing="10"
+                                                  ColumnDefinitions="*,*"
+                                                  Margin="0,10,0,10">
+                                                <!-- Entrada do Telefone Fixo -->
+                                                <Entry Grid.Column="0"
+                                                       Placeholder="Telefone Fixo"
+                                                       BackgroundColor="#252525"
+                                                       Keyboard="Telephone"
+                                                       MaxLength="16"
+                                                       Text="{Binding Telefone}" />
+                                                <!-- Entrada do Celular -->
+                                                <Entry Grid.Column="1"
+                                                       Placeholder="Celular"
+                                                       BackgroundColor="#252525"
+                                                       Keyboard="Telephone"
+                                                       MaxLength="16"
+                                                       Text="{Binding Celular}" />
+                                            </Grid>
+                                            <Grid ColumnSpacing="20"
+                                                  ColumnDefinitions="*,*">
+                                                <!-- Entrada nome Cidade -->
+                                                <Entry Grid.ColumnSpan="2"
+                                                       Placeholder="Cidade*"
+                                                       BackgroundColor="#252525"
+                                                       Keyboard="Text"
+                                                       MaxLength="50"
+                                                       Margin="0,0,70,0"
+                                                       Text="{Binding Cidade}" />
+                                                <!-- Entrada da da sigla do Estado -->
+                                                <Entry Grid.Column="1"
+                                                       Placeholder="Estado*"
+                                                       BackgroundColor="#252525"
+                                                       Keyboard="Plain"
+                                                       MaxLength="2"
+                                                       TextTransform="Uppercase"
+                                                       WidthRequest="60"
+                                                       HorizontalOptions="End"
+                                                       Text="{Binding Estado }" />
+                                            </Grid>
+                                            <!-- Entrada do Complemento -->
+                                            <Entry Placeholder="Complemento"
+                                                   BackgroundColor="#252525"
+                                                   Keyboard="Text"
+                                                   MaxLength="20"
+                                                   Text="{Binding Complemento}"
+                                                   Margin="0,10,0,10" />
+                                            <Label Text="É necessário criar ao menos um setor para essa nova unidade."
+                                                   FontFamily="PoppinsRegular"
+                                                   FontSize="12"
+                                                   TextColor="#8A8A8A" />
+                                            <!-- Entrada do Nome setor -->
+                                            <Entry Placeholder="Nome setor*"
+                                                   BackgroundColor="#252525"
+                                                   Keyboard="Text"
+                                                   MaxLength="20"
+                                                   Text="{Binding Nome_Setor}"
+                                                   Margin="0,10,0,0" />
+                                            <StackLayout HeightRequest="100"
+                                                         Margin="0,5,0,5">
+                                                <!-- Menssagem -->
+                                                <Label Text="{Binding MensageUnidade.Text}"
+                                                       TextColor="{Binding MensageUnidade.TextColor}"
+                                                       FontSize="11"
+                                                       Padding="5,0,5,0"
+                                                       FontFamily="PoppinsSemiBold"
+                                                       HorizontalTextAlignment="Start">
+                                                    <Label.Shadow>
+                                                        <Shadow Offset="1,1"
+                                                                Brush="#1F1F1F"
+                                                                Radius="1"
+                                                                Opacity="1" />
+                                                    </Label.Shadow>
+                                                </Label>
+                                                <!-- Button para Salvar e criar unidade-->
+                                                <Button  Text="Salvar"
+                                                         Margin="2,5,0,10"
+                                                         Padding="0,7,0,7"
+                                                         WidthRequest="150"
+                                                         HorizontalOptions="Start"
+                                                         cursores:CursorBehavior.Cursor="Hand"
+                                                         IsEnabled="{Binding EstadoButtons}"
+                                                         BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                                         Command="{Binding Btn_CriarUnidade}" />
+                                                <!-- Loading -->
+                                                <StackLayout HeightRequest="35">
+                                                    <ActivityIndicator Color="white"
+                                                                       IsRunning="{Binding LoadingCircle}"
+                                                                       IsVisible="{Binding LoadingCircle}"
+                                                                       Scale="0.6"
+                                                                       HorizontalOptions="Start" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                    <!-- COLUNA 3-->
+                                    <Frame Grid.Row="1"
+                                           Grid.Column="2"
+                                           Padding="0"
+                                           CornerRadius="3"
+                                           BorderColor="Transparent"
+                                           BackgroundColor="#1F1F1F">
+                                        <StackLayout Margin="20">
+                                            <Label Text="Criar novo setor para&#10;essa unidade"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="14"
+                                                   TextColor="#8A8A8A" />
+                                            <!-- Entrada do nome do novo Setor para a unidade atual-->
+                                            <Entry TextColor="White"
+                                                   MaxLength="100"
+                                                   Keyboard="Text"
+                                                   Placeholder="Insira o nome para o novo setor"
+                                                   BackgroundColor="#252525"
+                                                   Margin="-3,20,0,0"
+                                                   Text="{Binding NomeSetor}" />
+                                            <StackLayout HeightRequest="100"
+                                                         Margin="0,5,0,5">
+                                                <!-- Menssagem -->
+                                                <Label Text="{Binding MensageSetor.Text}"
+                                                       TextColor="{Binding MensageSetor.TextColor}"
+                                                       FontSize="11"
+                                                       Padding="5,0,5,0"
+                                                       FontFamily="PoppinsSemiBold"
+                                                       HorizontalTextAlignment="Start">
+                                                    <Label.Shadow>
+                                                        <Shadow Offset="1,1"
+                                                                Brush="#1F1F1F"
+                                                                Radius="1"
+                                                                Opacity="1" />
+                                                    </Label.Shadow>
+                                                </Label>
+                                                <!-- Button Criar Novo Setor -->
+                                                <Button  Text="Salvar"
+                                                         Margin="2,5,0,10"
+                                                         Padding="0,7,0,7"
+                                                         WidthRequest="150"
+                                                         HorizontalOptions="Start"
+                                                         cursores:CursorBehavior.Cursor="Hand"
+                                                         IsEnabled="{Binding EstadoButtons}"
+                                                         BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                                         Command="{Binding Btn_CriarSetor}" />
+                                                <!-- Loading -->
+                                                <StackLayout HeightRequest="35">
+                                                    <ActivityIndicator Color="white"
+                                                                       IsRunning="{Binding LoadingCircle}"
+                                                                       IsVisible="{Binding LoadingCircle}"
+                                                                       Scale="0.6"
+                                                                       HorizontalOptions="Start" />
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <Label Text="Altere seu setor atual"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="14"
+                                                   Margin="0,0,0,15"
+                                                   TextColor="#8A8A8A" />
+                                            <Label Margin="0,0,0,10"
+                                                   VerticalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="SeT Atual : "
+                                                              FontFamily="PoppinsRegular"
+                                                              FontSize="12"
+                                                              TextColor="#8A8A8A" />
+                                                        <Span Text="{Binding NomeSetorUI}"
+                                                              FontFamily="PoppinsSemiBold"
+                                                              FontSize="12"
+                                                              TextColor="White" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <!-- Lista de Setores -->
+                                            <Frame Padding="0"
+                                                   CornerRadius="4"
+                                                   HeightRequest="35"
+                                                   BorderColor="Transparent"
+                                                   BackgroundColor="#8e8e8e">
+                                                <Picker BackgroundColor="Transparent"
+                                                        TextColor="White"
+                                                        FontFamily="PoppinsRegular"
+                                                        FontSize="12"
+                                                        VerticalOptions="Center"
+                                                        TitleColor="#8A8A8A"
+                                                        ItemsSource="{Binding ListaSetores}"
+                                                        cursores:CursorBehavior.Cursor="Hand"
+                                                        SelectedIndex="{Binding IndiceSetorClicado, Mode=TwoWay}" />
+                                            </Frame>
+                                            <!-- Button Confirmar Mudança de Setor -->
+                                            <Button Text="Confirmar"
+                                                    WidthRequest="150"
+                                                    HorizontalOptions="Start"
+                                                    IsEnabled="{Binding EstadoButtons}"
+                                                    Margin="2,25,0,10"
+                                                    BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                                    CommandParameter="Setor"
+                                                    Command="{Binding Btn_MudarSetor}"
+                                                    cursores:CursorBehavior.Cursor="Hand" />
+                                            <Label Text="Altere sua unidade atual"
+                                                   FontFamily="PoppinsSemiBold"
+                                                   FontSize="14"
+                                                   Margin="0,20,0,15"
+                                                   TextColor="#8A8A8A" />
+                                            <Label Margin="0,0,0,10"
+                                                   VerticalTextAlignment="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Unid Atual : "
+                                                              FontFamily="PoppinsRegular"
+                                                              FontSize="12"
+                                                              TextColor="#8A8A8A" />
+                                                        <Span Text="{Binding NomeUnidadeUI}"
+                                                              FontFamily="PoppinsSemiBold"
+                                                              FontSize="12"
+                                                              TextColor="White" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <!-- Lista de Unidade -->
+                                            <Frame Padding="0"
+                                                   CornerRadius="4"
+                                                   HeightRequest="35"
+                                                   BorderColor="Transparent"
+                                                   BackgroundColor="#8e8e8e">
+                                                <Picker BackgroundColor="Transparent"
+                                                        TextColor="White"
+                                                        FontFamily="PoppinsRegular"
+                                                        FontSize="12"
+                                                        TitleColor="#8A8A8A"
+                                                        VerticalOptions="Center"
+                                                        ItemsSource="{Binding ListaUnidades}"
+                                                        cursores:CursorBehavior.Cursor="Hand"
+                                                        SelectedIndex="{Binding IndiceUnidadeClicado, Mode=TwoWay}" />
+                                            </Frame>
+                                            <!-- Button Confirmar Mudança de Unidade -->
+                                            <Button Text="Confirmar"
+                                                    WidthRequest="150"
+                                                    HorizontalOptions="Start"
+                                                    IsEnabled="{Binding EstadoButtons}"
+                                                    Margin="2,25,0,10"
+                                                    BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                                    CommandParameter="Unidade"
+                                                    Command="{Binding Btn_MudarUnidade}"
+                                                    cursores:CursorBehavior.Cursor="Hand" />
+                                        </StackLayout>
+                                    </Frame>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <!-- POPUP CONFIRMAR SENHA -->
+                <ContentView>
+                    <contentview:PopupConfirmarSenhaApiClient />
+                </ContentView>
+                <!-- LOADING DA PAGINA -->
+                <ContentView>
+                    <contentview:LoadingViewModel />
+                </ContentView>
+                <!-- SEM INTERNET -->
+                <ContentView>
+                    <contentview:SemInternetViewModel />
+                </ContentView>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

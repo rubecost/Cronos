@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels"
+             x:Class="Cronos.Views.RecomendacaoPage">
+    <ContentPage.BindingContext>
+        <viewmodel:RecomendacaoViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView >
+
+                    <Grid>
+                        <StackLayout Margin="20">
+                            <Grid ColumnDefinitions="*,*">
+                                <StackLayout Grid.Column="0">
+                                    <Label Text="Recomendação"
+                                           FontSize="18"
+                                           FontFamily="PoppinsSemiBold"
+                                           TextColor="White"
+                                           HorizontalTextAlignment="Start"
+                                           SemanticProperties.HeadingLevel="Level1" />
+                                    <Label Text="{Binding TagDeBusca, StringFormat='Equipamentos / {0} / Recomendação'}"
+                                           FontSize="9"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsLight"
+                                           HorizontalTextAlignment="Start" />
+                                </StackLayout>
+                                <!-- Button voltar -->
+                                <Label Grid.Column="1"
+                                       Text="&#xe913;"
+                                       FontFamily="icons"
+                                       FontSize="35"
+                                       TextColor="White"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Start"
+                                       cursores:CursorBehavior.Cursor="Hand">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Btn_Voltar}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </Grid>
+
+                            <CollectionView ItemsSource="{Binding Recomendacao}"
+                                            Margin="0,10,0,0">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical"
+                                                       ItemSpacing="10" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame BackgroundColor="#252525"
+                                               Padding="0"
+                                               BorderColor="Transparent"
+                                               CornerRadius="2">
+                                            <Grid ColumnDefinitions="*,*"
+                                                  RowDefinitions="*,*,*,*,*,*"
+                                                  ColumnSpacing="20"
+                                                  RowSpacing="10"
+                                                  Margin="20">
+                                                <!-- Exibe Data da Criação da Recomendação -->
+                                                <Label Grid.Column="0"
+                                                       Grid.Row="0"
+                                                       x:Name="TxtData"
+                                                       Text="{Binding Recomendacoes.Data_Criacao,StringFormat='{0:dd MMMM, yyyy}'}"
+                                                       FontSize="13"
+                                                       FontFamily="PoppinsRegular"
+                                                       TextColor="#8A8A8A"
+                                                       HorizontalTextAlignment="Start" />
+                                                <!-- Icon editar recomendação -->
+                                                <Label Grid.Row="0"
+                                                       Grid.Column="1"
+                                                       Text="&#xe90f;"
+                                                       FontFamily="icons"
+                                                       FontSize="30"
+                                                       TextColor="#8E8E8E"
+                                                       HorizontalOptions="End"
+                                                       VerticalOptions="Start"
+                                                       cursores:CursorBehavior.Cursor="Hand">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RecomendacaoViewModel}}, Path=Btn_OpenPopupEditarRecomendacao}"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                                <!-- Exibe TAG do equipamento -->
+                                                <Label Grid.ColumnSpan="2"
+                                                       Grid.Row="1"
+                                                       Text="{Binding Equipamentos.Tag}"
+                                                       FontSize="14"
+                                                       FontFamily="PoppinsSemiBold"
+                                                       TextColor="White"
+                                                       Margin="0,-10,0,0"
+                                                       HorizontalTextAlignment="Start" />
+                                                <!-- Exibe Texto da Recomendação -->
+                                                <Label Grid.ColumnSpan="2"
+                                                       Grid.Row="2"
+                                                       Text="{Binding Recomendacoes.Texto}"
+                                                       FontSize="12"
+                                                       FontFamily="PoppinsRegular"
+                                                       TextColor="#8A8A8A"
+                                                       HorizontalTextAlignment="Start" />
+                                                <Label Grid.ColumnSpan="2"
+                                                       Grid.Row="3"
+                                                       Text="Qual item da Sugestão foi parcialmente atendido:"
+                                                       FontSize="12"
+                                                       FontFamily="PoppinsRegular"
+                                                       TextColor="White"
+                                                       HorizontalTextAlignment="Start"
+                                                       IsVisible="True" />
+                                                <!-- Exibe o que foi parcialmente atendido -->
+                                                <Label Grid.ColumnSpan="2"
+                                                       Grid.Row="4"
+                                                       Text="{Binding Recomendacoes.Detalhes_Parcial}"
+                                                       FontSize="12"
+                                                       FontFamily="PoppinsRegular"
+                                                       TextColor="#8A8A8A"
+                                                       HorizontalTextAlignment="Start"
+                                                       IsVisible="True" />
+                                                <StackLayout Grid.ColumnSpan="2"
+                                                             Grid.Row="5"
+                                                             Orientation="Horizontal">
+                                                    <!-- Exibe Status da Recomendação / Atendida -->
+                                                    <Label IsVisible="True"
+                                                           Margin="0,0,20,0"
+                                                           Text="{Binding Recomendacoes.Status_Recomendacao}">
+                                                        <!--<Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Recomendacoes.Status_Recomendacao}"
+                                                                      FontSize="12"
+                                                                      FontFamily="PoppinsRegular"
+                                                                      TextColor="#089451" />
+                                                                <Span Text=" &#xe928;"
+                                                                      FontFamily="icons"
+                                                                      FontSize="12"
+                                                                      TextColor="#089451" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>-->
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label"
+                                                                         Binding="{Binding Recomendacoes.Status_Recomendacao}"
+                                                                         Value="Atendida">
+                                                                <Setter Property="TextColor"
+                                                                        Value="Green" />
+                                                                <Setter Property="FontSize"
+                                                                        Value="12" />
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
+                                                                         Binding="{Binding Recomendacoes.Status_Recomendacao}"
+                                                                         Value="NaoAtendida">
+                                                                <Setter Property="TextColor"
+                                                                        Value="Red" />
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label"
+                                                                         Binding="{Binding Recomendacoes.Status_Recomendacao}"
+                                                                         Value="ParcialmenteAtendida">
+                                                                <Setter Property="TextColor"
+                                                                        Value="Yellow" />
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                    <!-- Exibe Status da Recomendação / Parcialmente -->
+                                                    <Label IsVisible="False"
+                                                           Margin="0,0,20,0">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Recomendacoes.Status_Recomendacao}"
+                                                                      FontSize="12"
+                                                                      FontFamily="PoppinsRegular"
+                                                                      TextColor="#EB9C25" />
+                                                                <Span Text=" &#xe929;"
+                                                                      FontFamily="icons"
+                                                                      FontSize="12"
+                                                                      TextColor="#EB9C25" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                    <!-- Exibe Status da Recomendação / Não atendida -->
+                                                    <Label IsVisible="False"
+                                                           Margin="0,0,20,0">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Recomendacoes.Status_Recomendacao}"
+                                                                      FontSize="12"
+                                                                      FontFamily="PoppinsRegular"
+                                                                      TextColor="#F14343" />
+                                                                <Span Text=" &#xe900;"
+                                                                      FontFamily="icons"
+                                                                      FontSize="12"
+                                                                      TextColor="#F14343" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                    <!-- Exibe a data da ultima atualização do status -->
+                                                    <Label Text="{Binding Recomendacoes.Data_Criacao,StringFormat='Ultima Atualização no Status: {0:dd/MM/yyyy HH:mm:ss}'}"
+                                                           FontSize="12"
+                                                           FontFamily="PoppinsRegular"
+                                                           TextColor="#8A8A8A"
+                                                           HorizontalTextAlignment="Start" />
+                                                </StackLayout>
+
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                               </Grid>
+                </ScrollView>
+                <!-- POPUP EDITAR STATUS RECOMENDAÇÃO -->
+                <Grid IsVisible="{Binding PopupEditarRecomendacao}">
+                    <BoxView Style="{StaticResource PopupBoxViewStyle}"/>
+                    <Frame CornerRadius="3"
+                           WidthRequest="550"
+                           HeightRequest="345"
+                           Padding="0"
+                           BackgroundColor="#252525"
+                           BorderColor="#4B4B4B"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                        <StackLayout Style="{StaticResource PopupStackLayoutStyle}">
+                            <Label Style="{StaticResource PopupIconLabelStyle}"
+                                   Text="&#xe900;">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Btn_ClosePopupEditarRecomendacao}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <StackLayout Margin="20,10,20,20">
+
+                                <Label Style="{StaticResource PopupTextLabelStyle}"
+                                       Text="Insira um novo Status para esta Recomendação" />
+
+                                <!-- Radio Button Alterar Status da notificação -->
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="Center"
+                                             RadioButtonGroup.GroupName="GrpStatusRecomendacao"
+                                             Margin="0,10,0,5">
+                                    <!-- Opçao atendida -->
+                                    <RadioButton Content="Atendida"
+                                                 FontFamily="PoppinsRegular"
+                                                 FontSize="12"
+                                                 IsChecked="True"
+                                                 Margin="0,0,20,0"
+                                                 TextColor="#089451"
+                                                 VerticalOptions="Center"
+                                                 HorizontalOptions="Start"
+                                                 GroupName="GrpStatusRecomendacao"
+                                                 cursores:CursorBehavior.Cursor="Hand">
+                                        <RadioButton.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_Status}"
+                                                                  CommandParameter="Atendida" />
+                                        </RadioButton.GestureRecognizers>
+                                    </RadioButton>
+                                    <!-- Opção Parcialmente atendida -->
+                                    <RadioButton Content="Parcialmente Atendida"
+                                                 FontFamily="PoppinsRegular"
+                                                 FontSize="12"
+                                                 IsChecked="False"
+                                                 TextColor="#EB9C25"
+                                                 VerticalOptions="Center"
+                                                 HorizontalOptions="Start"
+                                                 GroupName="GrpStatusRecomendacao"
+                                                 cursores:CursorBehavior.Cursor="Hand">
+                                        <RadioButton.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_Status}"
+                                                                  CommandParameter="Parcialmente" />
+                                        </RadioButton.GestureRecognizers>
+                                    </RadioButton>
+                                </StackLayout>
+                                <!-- Entrada do que foi parcialmente atendido -->
+                                <Editor BackgroundColor="#1F1F1F"
+                                        Keyboard="Text"
+                                        Margin="0,0,0,25"
+                                        FontSize="12"
+                                        TextColor="White"
+                                        PlaceholderColor="#8E8E8E"
+                                        Placeholder="Se as recomendações foram parcialmente atendidas, por favor, insira aqui as recomendações que foram implementadas:"
+                                        MaxLength="1000"
+                                        FontFamily="PoppinsRegular"
+                                        HeightRequest="130"
+                                        IsEnabled="{Binding IsEntryEnabled}" />
+                                <!-- Button salvar novo status da recomendação -->
+                                <Button Text="Salvar"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                        cursores:CursorBehavior.Cursor="Hand" />
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

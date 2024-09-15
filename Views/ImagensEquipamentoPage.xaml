@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels"
+             x:Class="Cronos.Views.ImagensEquipamentoPage">
+
+    <ContentPage.BindingContext>
+        <viewmodel:ImagensEquipamentoViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView>
+                    <StackLayout Margin="20">
+                        <Grid ColumnDefinitions="*,*">
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Imagens do Equipamento"
+                                       FontSize="18"
+                                       FontFamily="PoppinsSemiBold"
+                                       TextColor="White"
+                                       HorizontalTextAlignment="Start"
+                                       SemanticProperties.HeadingLevel="Level1" />
+                                <Label Text="{Binding TagDeBusca, StringFormat='Equipamentos / {0} / Imagens do Equipamento'}"
+                                       FontSize="9"
+                                       TextColor="#8A8A8A"
+                                       FontFamily="PoppinsLight"
+                                       HorizontalTextAlignment="Start" />
+                            </StackLayout>
+                            <!-- Button voltar -->
+                            <Label Grid.Column="1"
+                                   Text="&#xe913;"
+                                   FontFamily="icons"
+                                   FontSize="35"
+                                   TextColor="White"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Start"
+                                   cursores:CursorBehavior.Cursor="Hand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Btn_Voltar}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+
+                        <Frame BackgroundColor="#252525"
+                               BorderColor="Transparent"
+                               CornerRadius="2"
+                               Padding="20"
+                               Margin="0,10,0,0">
+                            <StackLayout>
+                                <Grid >
+                                    <!-- Coleção de imagens -->
+                                    <CollectionView ItemsSource="{Binding ImagensAgrupadas}" >
+
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout Orientation="Horizontal"
+                                                               ItemSpacing="1.0"/>
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <!-- Exibe as imagens dentro do grupo de uma mesma data -->
+                                                <StackLayout >
+                                                   
+                                                    <Frame Padding="0"
+                                                           BorderColor="#252525"
+                                                           CornerRadius="10"
+                                                           MaximumWidthRequest="180"
+                                                           MaximumHeightRequest="180"
+                                                           HorizontalOptions="Start">
+                                                        <Grid>
+                                                            <!-- Exibe as Imagens do equipamento -->
+                                                            <Image Aspect="AspectFill">
+                                                                <Image.Source>
+                                                                    <UriImageSource Uri="{Binding URL_Imagem}"
+                                                                                    CachingEnabled="False"
+                                                                                    CacheValidity="1" />
+                                                                </Image.Source>
+                                                            </Image>
+                                                            <Label Text="&#xe933;"
+                                                                   FontFamily="icons"
+                                                                   FontSize="100"
+                                                                   Padding="10,0,0,0"
+                                                                   TextColor="White"
+                                                                   HorizontalOptions="Center"
+                                                                   VerticalOptions="Center"
+                                                                   BindingContext="{x:Reference BoxHoverImage}"
+                                                                   Opacity="{Binding Opacity}" />
+                                                            <!-- Button abrir imagem -->
+                                                            <BoxView Color="Transparent"
+                                                                     Opacity="0"
+                                                                     Margin="0"
+                                                                     x:Name="BoxHoverImage"
+                                                                     cursores:CursorBehavior.Cursor="Hand">
+                                                                <BoxView.GestureRecognizers>
+                                                                    <PointerGestureRecognizer PointerEntered="ImagemEntered"
+                                                                                              PointerExited="ImagemExited" />
+                                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ImagensEquipamentoViewModel}}, Path=Btn_ExpandirImagem}"
+                                                                                          CommandParameter="{Binding URL_Imagem}" />
+                                                                </BoxView.GestureRecognizers>
+                                                            </BoxView>
+                                                        </Grid>
+                                                    </Frame>
+                                                    <Label Text="{Binding Data_Criacao, StringFormat='Data: {0:dd/MM/yyyy}'}"
+                                                           FontFamily="PoppinsRegular"
+                                                           FontSize="12"
+                                                           TextColor="#8A8A8A"
+                                                           Margin="5,10,0,30" />
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </Grid>
+
+                                <!-- BUTTONS DE NAVEGAÇÃO -->
+                                <StackLayout Style="{StaticResource NavigationStackLayoutStyle}"
+                                             Margin="0,10,10,0">
+                                    <!-- Ver resultados anteriores -->
+                                    <Label Style="{StaticResource NavigationLabelStyle}"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Style="{StaticResource FormattedSpanIconStyle}"
+                                                      Text="&#xe947;" />
+                                                <Span Style="{StaticResource FormattedSpanTextStyle}"
+                                                      Text=" Anterior" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <!-- Ver próximos resultados -->
+                                    <Label Style="{StaticResource NavigationLabelStyle}"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Style="{StaticResource FormattedSpanTextStyle}"
+                                                      Text="Próximo " />
+                                                <Span Style="{StaticResource FormattedSpanIconStyle}"
+                                                      Text="&#xe946;" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+                </ScrollView>
+                <!-- Lightbox - Imagem expandida -->
+                <ContentView IsVisible="{Binding ImagemExpandida}">
+                    <contentview:LightboxImageContentView />
+                </ContentView>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

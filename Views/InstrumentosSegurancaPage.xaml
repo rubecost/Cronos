@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cronos.Views.InstrumentosSegurancaPage"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels">
+    <ContentPage.BindingContext>
+        <viewmodel:InstrumentosSegurancaViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView>
+
+                    <StackLayout Margin="20">
+                        <Grid ColumnDefinitions="*,*"
+                              Margin="0,0,0,10">
+                            <StackLayout Grid.Column="0">
+                                <Label Text="Instrumentos de Segurança"
+                                       FontSize="18"
+                                       FontFamily="PoppinsSemiBold"
+                                       TextColor="White"
+                                       HorizontalTextAlignment="Start"
+                                       SemanticProperties.HeadingLevel="Level1" />
+                                <Label Text="{Binding TagDeBusca, StringFormat='Equipamentos / {0} / Instrumentos de Segurança'}"
+                                       FontSize="9"
+                                       TextColor="#8A8A8A"
+                                       FontFamily="PoppinsLight"
+                                       HorizontalTextAlignment="Start" />
+                            </StackLayout>
+                            <!-- Button voltar -->
+                            <Label Grid.Column="1"
+                                   Text="&#xe913;"
+                                   FontFamily="icons"
+                                   FontSize="35"
+                                   TextColor="White"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Start"
+                                   cursores:CursorBehavior.Cursor="Hand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Btn_Voltar}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+
+                        <!-- INDICAR(ES)  DE PRESSÃO ASSOCIADO(S) -->
+                        <Frame BackgroundColor="#252525"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               CornerRadius="2">
+                            <StackLayout Margin="20">
+                                <Label Grid.Row="0"
+                                       Grid.ColumnSpan="3"
+                                       Text="Indicar(es)  de Pressão Associado(s)"
+                                       FontFamily="PoppinsSemiBold"
+                                       FontSize="15"
+                                       TextColor="White"
+                                       Margin="0,0,0,10" />
+                                <Grid RowSpacing="10"
+                                      ColumnDefinitions="*,*,*">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="TAG Identificação"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           Text="Número Certificado"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="2"
+                                           Text="Data da Última Calibração"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <CollectionView Grid.Row="1"
+                                                    Grid.ColumnSpan="7"
+                                                    ItemsSource="{Binding Indicadores}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid ColumnDefinitions="*,*,*"
+                                                      RowSpacing="10">
+                                                    <Frame Grid.Column="0"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe TAG Identificador -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Identificacao_Tag}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="1"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Número Certificado -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding  Numero_Certificado}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="2"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Data da Última Calibração -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Ultima_Calibracao}" />
+                                                    </Frame>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </Grid>
+
+                                <!-- BUTTONS DE NAVEGAÇÃO -->
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="End"
+                                             Margin="0,10,0,0">
+                                    <!-- Ver resultados anteriores -->
+                                    <Label VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Margin="0,0,10,0"
+                                           Text="&#xe947; Anterior"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}"
+                                                                  CommandParameter="MenosDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <!-- Ver próximos resultados -->
+                                    <Label IsVisible="True"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Text="Próximo &#xe946;"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}"
+                                                                  CommandParameter="MaisDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                        <!-- VÁLVULAS DE SEGURANÇA/ALÍVIO -->
+                        <Frame BackgroundColor="#252525"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               CornerRadius="2"
+                               Margin="0,20,0,20">
+                            <StackLayout Margin="20">
+                                <Label Grid.Row="0"
+                                       Grid.ColumnSpan="3"
+                                       Text="Válvulas de Segurança/Alívio"
+                                       FontFamily="PoppinsSemiBold"
+                                       FontSize="15"
+                                       TextColor="White"
+                                       Margin="0,0,0,10" />
+                                <Grid RowSpacing="10"
+                                      ColumnDefinitions="*,*,*,*,*,*,*">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="TAG Identificação"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           Text="Pressão Abertura"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="2"
+                                           Text="Bitola (Ø)"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="3"
+                                           Text="DCBI"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="4"
+                                           Text="Número Certificado"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="5"
+                                           Text="Data da Última Calibração"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="6"
+                                           Text="Data da Próxima Calibração"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <CollectionView Grid.Row="1"
+                                                    Grid.ColumnSpan="7"
+                                                    ItemsSource="{Binding Indicadores}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid ColumnDefinitions="*,*,*,*,*,*,*"
+                                                      RowSpacing="10">
+                                                    <Frame Grid.Column="0"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe TAG Identificação -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="16/35.779-43" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="1"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Pressão Abertura -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding  Numero_Certificado}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="2"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Bitola (Ø) -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Ultima_Calibracao}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="3"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe DCBI  -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Identificacao_Tag}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="4"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Número Certificado -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding  Numero_Certificado}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="5"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Data da Última Calibração -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Ultima_Calibracao}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="6"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Data da Próxima Calibração -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Ultima_Calibracao}" />
+                                                    </Frame>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </Grid>
+                                <!-- BUTTONS DE NAVEGAÇÃO -->
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="End"
+                                             Margin="0,10,0,0">
+                                    <!-- Ver resultados anteriores -->
+                                    <Label VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Margin="0,0,10,0"
+                                           Text="&#xe947; Anterior"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}"
+                                                                  CommandParameter="MenosDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <!-- Ver próximos resultados -->
+                                    <Label IsVisible="True"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Text="Próximo &#xe946;"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}"
+                                                                  CommandParameter="MaisDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                        <!-- MANÔMETROS -->
+                        <Frame BackgroundColor="#252525"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               CornerRadius="2">
+                            <StackLayout Margin="20">
+                                <Label Grid.Row="0"
+                                       Grid.ColumnSpan="3"
+                                       Text="Manômetros"
+                                       FontFamily="PoppinsSemiBold"
+                                       FontSize="15"
+                                       TextColor="White"
+                                       Margin="0,0,0,10" />
+                                <Grid RowSpacing="10"
+                                      ColumnDefinitions="*,*,*,*,*,*,*">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="TAG Identificação"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           Text="Máxima Pressão"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="2"
+                                           Text="Mínima Pressão"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="3"
+                                           Text="Unidade de Pressão"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="4"
+                                           Text="Número Certificado"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="5"
+                                           Text="Data da Última Calibração"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="6"
+                                           Text="Data da Próxima Calibração"
+                                           FontSize="12"
+                                           TextColor="#8A8A8A"
+                                           FontFamily="PoppinsRegular" />
+                                    <CollectionView Grid.Row="1"
+                                                    Grid.ColumnSpan="7"
+                                                    ItemsSource="{Binding Indicadores}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid ColumnDefinitions="*,*,*,*,*,*,*"
+                                                      RowSpacing="10">
+                                                    <Frame Grid.Column="0"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe TAG Identificação -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="16/35.779-43" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="1"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Máxima Pressão -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding  Numero_Certificado}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="2"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Mínima Pressão -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Ultima_Calibracao}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="3"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Unidade de Pressão -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Identificacao_Tag}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="4"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Número Certificado -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding  Numero_Certificado}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="5"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Data da Última Calibração -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Ultima_Calibracao}" />
+                                                    </Frame>
+                                                    <Frame Grid.Column="6"
+                                                           Style="{DynamicResource FrameEQPStyle}">
+                                                        <!-- Exibe Data da Próxima Calibração -->
+                                                        <Label Style="{DynamicResource LabelEQPStyle}"
+                                                               Text="{Binding Ultima_Calibracao}" />
+                                                    </Frame>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </Grid>
+                                <!-- BUTTONS DE NAVEGAÇÃO -->
+                                <StackLayout Orientation="Horizontal"
+                                             HorizontalOptions="End"
+                                             Margin="0,10,0,0">
+                                    <!-- Ver resultados anteriores -->
+                                    <Label VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Margin="0,0,10,0"
+                                           Text="&#xe947; Anterior"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}"
+                                                                  CommandParameter="MenosDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <!-- Ver próximos resultados -->
+                                    <Label IsVisible="True"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Text="Próximo &#xe946;"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding .}"
+                                                                  CommandParameter="MaisDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cronos.Views.MenuEquipamentoPage"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels">
+    <ContentPage.BindingContext>
+        <viewmodel:MenuEquipamentoViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView >
+                    <StackLayout Margin="20">
+                        <Grid ColumnDefinitions="*,*">
+                            <StackLayout Grid.Column="0">
+                                <!-- Exibe Tag Identificação do Equipamento -->
+                                <Label x:Name="TxtTitulo"
+                                       Text="{Binding TagDeBusca}"
+                                       FontSize="18"
+                                       FontFamily="PoppinsSemiBold"
+                                       TextColor="White"
+                                       HorizontalTextAlignment="Start"
+                                       SemanticProperties.HeadingLevel="Level1" />
+                                <Label BindingContext="{x:Reference TxtTitulo}"
+                                       Text="{Binding Text,StringFormat='Equipamentos / {0}'}"
+                                       FontSize="9"
+                                       TextColor="#8A8A8A"
+                                       FontFamily="PoppinsLight"
+                                       HorizontalTextAlignment="Start" />
+                            </StackLayout>
+                            <!-- Button voltar -->
+                            <Label Grid.Column="1"
+                                   Text="&#xe913;"
+                                   FontFamily="icons"
+                                   FontSize="35"
+                                   TextColor="White"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Start"
+                                   cursores:CursorBehavior.Cursor="Hand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Btn_AbrirOpcaoClicada}"
+                                                          CommandParameter="EquipamentosPage" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Frame BackgroundColor="#252525"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               CornerRadius="2"
+                               Margin="0,10,0,0">
+                            <Grid Margin="40"
+                                  ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*"
+                                  RowDefinitions="*,*,*,*,*,*,*"
+                                  RowSpacing="0">
+                                <Grid Grid.Column="4"
+                                      Grid.ColumnSpan="5"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="7">
+                                    <Image Source="grade_opcoes.png"
+                                           Aspect="Fill" />
+                                    <Frame Padding="0"
+                                           CornerRadius="200"
+                                           BackgroundColor="#8E8E8E"
+                                           BorderColor="#1F1F1F"
+                                           IsClippedToBounds="True"
+                                           MaximumHeightRequest="170"
+                                           MaximumWidthRequest="170">
+                                        <Grid>
+                                            <Label Text="&#xe902;"
+                                                   FontSize="100"
+                                                   FontFamily="icons"
+                                                   TextColor="White"
+                                                   HorizontalTextAlignment="Center"
+                                                   VerticalTextAlignment="Center" />
+                                            <!-- Imagem principal do equipamento -->
+                                            <Image Source="{Binding .}"
+                                                   Aspect="AspectFill" />
+                                        </Grid>
+                                    </Frame>
+                                </Grid>
+                                <!-- Button Relatorio Digital-->
+                                <Frame Grid.Column="1"
+                                       Grid.ColumnSpan="3"
+                                       Grid.Row="0"
+                                       Padding="0"
+                                       BackgroundColor="#1F1F1F"
+                                       BorderColor="#545454"
+                                       CornerRadius="3"
+                                       VerticalOptions="End">
+                                    <Image Source="btn_txt1.png"
+                                           Scale="1"
+                                           Aspect="AspectFit"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_AbrirOpcaoClicada}"
+                                                                  CommandParameter="RelatorioDigitalPage" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Frame>
+                                <!-- Button Programação das Inspeções -->
+                                <Frame Grid.Column="0"
+                                       Grid.ColumnSpan="3"
+                                       Grid.Row="2"
+                                       Padding="0"
+                                       BackgroundColor="#1F1F1F"
+                                       BorderColor="#545454"
+                                       CornerRadius="3"
+                                       VerticalOptions="Center">
+                                    <Image Source="btn_txt2.png"
+                                           Scale="1"
+                                           Aspect="AspectFit"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_AbrirOpcaoClicada}"
+                                                                  CommandParameter="ProgramacaoInspecoesPage" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Frame>
+                                <!-- Button Instrumentos de segurança -->
+                                <Frame Grid.Column="0"
+                                       Grid.ColumnSpan="3"
+                                       Grid.Row="4"
+                                       Padding="0"
+                                       BackgroundColor="#1F1F1F"
+                                       BorderColor="#545454"
+                                       CornerRadius="3"
+                                       VerticalOptions="Start">
+                                    <Image Source="btn_txt3.png"
+                                           Scale="1"
+                                           Aspect="AspectFit"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_AbrirOpcaoClicada}"
+                                                                  CommandParameter="InstrumentosSegurancaPage" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Frame>
+                                <!-- Button Recomendação -->
+                                <Frame Grid.Column="9"
+                                       Grid.ColumnSpan="3"
+                                       Grid.Row="0"
+                                       Padding="0"
+                                       BackgroundColor="#1F1F1F"
+                                       BorderColor="#545454"
+                                       CornerRadius="3"
+                                       VerticalOptions="End">
+                                    <Image Source="btn_txt4.png"
+                                           Scale="1"
+                                           Aspect="AspectFit"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_AbrirOpcaoClicada}"
+                                                                  CommandParameter="RecomendacaoPage" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Frame>
+                                <!-- Button Fotos do equipamento -->
+                                <Frame Grid.Column="10"
+                                       Grid.ColumnSpan="3"
+                                       Grid.Row="2"
+                                       Padding="0"
+                                       BackgroundColor="#1F1F1F"
+                                       BorderColor="#545454"
+                                       CornerRadius="3"
+                                       VerticalOptions="Center">
+                                    <Image Source="btn_txt5.png"
+                                           Scale="1"
+                                           Aspect="AspectFit"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_AbrirOpcaoClicada}"
+                                                                  CommandParameter="ImagensEquipamentoPage" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Frame>
+                                <!-- Button Usar QR-Code -->
+                                <Frame Grid.Column="10"
+                                       Grid.ColumnSpan="3"
+                                       Grid.Row="4"
+                                       Padding="0"
+                                       BackgroundColor="#1F1F1F"
+                                       BorderColor="#545454"
+                                       CornerRadius="3"
+                                       VerticalOptions="Start">
+                                    <Image Source="btn_txt6.png"
+                                           Scale="1"
+                                           Aspect="AspectFit"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_AbrirOpcaoClicada}"
+                                                                  CommandParameter="QrCodePage" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Frame>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

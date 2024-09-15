@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             x:Class="Cronos.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False"
+             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <viewmodel:LoginViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <Image Source="login_background.png"
+               Opacity="0.2"
+               Aspect="Fill" />
+        <Image Source="login_background_icon.png"
+               Opacity="0.1"
+               Aspect="AspectFit" />
+        <Grid ColumnSpacing="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0"
+                         Grid.Row="0"
+                         Margin="100,20,0,20"
+                         MaximumWidthRequest="400"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center">
+                <!-- Logo Empresa -->
+                <Image Source="logo_idealle.png"
+                       Margin="0,0,0,10" />
+                <Label Text="Login"
+                       FontSize="40"
+                       FontFamily="PoppinsBold"
+                       TextColor="White"
+                       SemanticProperties.HeadingLevel="Level1" />
+                <Label Text="O Mais Avançado &#10;Sistema de Gestão Industrial"
+                       FontSize="14"
+                       FontFamily="PoppinsBold"
+                       TextColor="White"
+                       Margin="0,10,0,50" />
+                <BoxView Color="White"
+                         HeightRequest="2"
+                         WidthRequest="70"
+                         HorizontalOptions="Start" />
+                <Label Text="Simplifique o complexo: um software inteligente para controle completo de inspeções, manutenções e calibrações com máxima precisão e eficiência."
+                       FontSize="11"
+                       FontFamily="PoppinsLight"
+                       TextColor="White"
+                       Margin="0,10,0,0" 
+                       FontAttributes="None"/>
+            </StackLayout>
+            <StackLayout Grid.Column="1"
+                         Grid.Row="0"
+                         VerticalOptions="Center">
+                <Frame Padding="0"
+                       CornerRadius="5"
+                       Margin="0,20,100,20"
+                       MaximumWidthRequest="400"
+                       BorderColor="Transparent"
+                       BackgroundColor="Transparent">
+                    <Grid WidthRequest="300">
+                        <BoxView Color="White"
+                                 Opacity="0.2" />
+                        <StackLayout Padding="30,20,30,30">
+                            <Label Text="Fazer Login"
+                                   FontSize="25"
+                                   FontFamily="PoppinsBold"
+                                   TextColor="White" />
+                            <Label Text="E-mail"
+                                   FontSize="12"
+                                   TextTransform="Uppercase"
+                                   FontFamily="PoppinsRegular"
+                                   TextColor="White"
+                                   Margin="0,20,0,5" />
+                            <Frame Padding="0"
+                                   BorderColor="#8E8E8E"
+                                   BackgroundColor="Transparent"
+                                   CornerRadius="3">
+                                <!-- Entrada do E-mail -->
+                                <Entry BackgroundColor="Transparent"
+                                       Keyboard="Email"
+                                       Placeholder="Insira seu e-mail de login"
+                                       MaxLength="200"
+                                       IsSpellCheckEnabled="false"
+                                       FontFamily="PoppinsRegular"
+                                       Text="{Binding Email}" />
+                            </Frame>
+                            <Label Text="Senha"
+                                   FontSize="12"
+                                   TextTransform="Uppercase"
+                                   FontFamily="PoppinsRegular"
+                                   TextColor="White"
+                                   Margin="0,15,0,5" />
+                            <Frame Style="{DynamicResource PasswordFrameStyle}">
+                                <Grid>
+                                    <!-- Entrada da senha -->
+                                    <Entry x:Name="EtySenha"
+                                           Placeholder="Insira sua senha de login"
+                                           Style="{DynamicResource PasswordEntryStyle}"
+                                           Text="{Binding Senha}" />
+                                    <Label x:Name="IconOlhoAberto"
+                                           ClassId="Aberto"
+                                           Text="&#xe9ce;"
+                                           Style="{StaticResource PasswordIconStyle}"
+                                           IsVisible="False">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="VisibilidadeSenha" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label x:Name="IconOlhoFechado"
+                                           ClassId="Fechado"
+                                           Text="&#xe9d1;"
+                                           Style="{StaticResource PasswordIconStyle}">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="VisibilidadeSenha" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                            <Label Text="{Binding Message}"
+                                   TextColor="#F14343"
+                                   FontSize="11"
+                                   Padding="5,0,5,0"
+                                   FontFamily="PoppinsSemiBold"
+                                   HorizontalOptions="Start">
+                                <Label.Shadow>
+                                    <Shadow Offset="1,1"
+                                            Brush="#1F1F1F"
+                                            Radius="1"
+                                            Opacity="1" />
+                                </Label.Shadow>
+                            </Label>
+                            <!-- Button Login -->
+                            <Button Text="Login"
+                                    Margin="0,10,0,5"
+                                    HorizontalOptions="End"
+                                    IsEnabled="{Binding EstadoButtons}"
+                                    BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                    cursores:CursorBehavior.Cursor="Hand"
+                                    Command="{Binding Btn_FazerLogin}" />
+                            <!-- Loading -->
+                            <StackLayout HeightRequest="35">
+                                <ActivityIndicator Color="white"
+                                                   IsRunning="{Binding LoadingVisible}"
+                                                   IsVisible="{Binding LoadingCircle}"
+                                                   Scale="0.6"
+                                                   HorizontalOptions="End" />
+                            </StackLayout>
+                            <!-- Button esqueci minha senha -->
+                            <Label Text="Esqueci minha senha"
+                                   FontSize="10"
+                                   FontFamily="PoppinsRegular"
+                                   TextColor="White"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Start"
+                                   cursores:CursorBehavior.Cursor="Hand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Btn_MostrarPopupRecuperarSenha }" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </Grid>
+
+        <!-- POPUP RECUPERAR SENHA P/E-MAIL -->
+        <Grid IsVisible="{Binding PopupAddEmail}"
+              Style="{StaticResource PopupGridStyle}">
+            <BoxView Style="{StaticResource PopupBoxViewStyle}" />
+            <Frame Style="{StaticResource PopupFrameStyle}"
+                   MaximumHeightRequest="255">
+                <StackLayout Style="{StaticResource PopupStackLayoutStyle}">
+                    <Label Style="{StaticResource PopupIconLabelStyle}"
+                           Text="&#xe900;">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Btn_ClosePopups}"
+                                                  CommandParameter="popupemail" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <StackLayout Style="{StaticResource PopupInnerStackLayoutStyle}"
+                                 HorizontalOptions="Center">
+                        <Label Style="{StaticResource PopupTextLabelStyle}"
+                               Text="Redefinição de senha" />
+                        <Label Text="Digite um E-mail previamente cadastrado&#10;para redefinir sua senha."
+                               FontSize="10"
+                               Margin="0,5,0,20"
+                               TextColor="#8A8A8A"
+                               FontFamily="PoppinsLight"
+                               HorizontalTextAlignment="Center" />
+                        <!-- Entrada do E-mail Recuperar Senha -->
+                        <Entry BackgroundColor="#1F1F1F"
+                               Keyboard="Email"
+                               Placeholder="Insira seu e-mail"
+                               MaxLength="200"
+                               IsSpellCheckEnabled="false"
+                               WidthRequest="280"
+                               FontFamily="PoppinsRegular"
+                               HorizontalTextAlignment="Center"
+                               Text="{Binding EmailRecuperacao}" />
+                        <!-- Menssagem Email Invalido -->
+                        <Label Text="{Binding MessageRedefinicao.Text}"
+                               TextColor="{Binding MessageRedefinicao.TextColor}"
+                               FontSize="11"
+                               Padding="5,0,5,0"
+                               FontFamily="PoppinsSemiBold"
+                               HorizontalTextAlignment="Center">
+                            <Label.Shadow>
+                                <Shadow Offset="1,1"
+                                        Brush="#1F1F1F"
+                                        Radius="1"
+                                        Opacity="1" />
+                            </Label.Shadow>
+                        </Label>
+                        <!-- Button enviar E-mail Recuperar Senha -->
+                        <Button Text="Confirmar"
+                                Margin="0,10,0,5"
+                                HorizontalOptions="Center"
+                                IsEnabled="{Binding EstadoButtons}"
+                                BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                cursores:CursorBehavior.Cursor="Hand"
+                                Command="{Binding Btn_EmailRecuperacaoPopup}" />
+                        <!-- Loading -->
+                        <ActivityIndicator Color="white"
+                                           IsRunning="{Binding LoadingCircle}"
+                                           IsVisible="{Binding LoadingCircle}"
+                                           Scale="0.6" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- POPUP RECUPERAR SENHA P/CODE CONFIRMAÇÃO -->
+        <Grid IsVisible="{Binding PopupAddCode}"
+              Style="{StaticResource PopupGridStyle}">
+            <BoxView Style="{StaticResource PopupBoxViewStyle}" />
+            <Frame Style="{StaticResource PopupFrameStyle}"
+                   MaximumHeightRequest="280"
+                   MaximumWidthRequest="500">
+                <StackLayout Style="{StaticResource PopupStackLayoutStyle}">
+                    <Label Style="{StaticResource PopupIconLabelStyle}"
+                           Text="&#xe900;">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Btn_ClosePopups}"
+                                                  CommandParameter="popupcode" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <StackLayout Style="{StaticResource PopupInnerStackLayoutStyle}">
+                        <Label Style="{StaticResource PopupTextLabelStyle}"
+                               Text="Insira abaixo o código que foi enviado&#10;para seu e-mail" />
+                        <Label Text="Se você não encontrar a mensagem de e-mail contendo o código em sua caixa de entrada. Verifique também sua pasta de spam."
+                               FontSize="10"
+                               Margin="0,5,0,0"
+                               TextColor="#8A8A8A"
+                               FontFamily="PoppinsLight"
+                               HorizontalTextAlignment="Center" />
+                        <!-- Entrada do Codigo recebido por E-mail Recuperar Senha -->
+                        <Entry BackgroundColor="#1F1F1F"
+                               Keyboard="Numeric"
+                               Placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                               MaxLength="36"
+                               FontFamily="PoppinsRegular"
+                               HorizontalTextAlignment="Center"
+                               Margin="0,20,0,0"
+                               WidthRequest="300"
+                               Text="{Binding CodeConfirmacao}" />
+                        <!-- Menssagem Alerta Código Inválido -->
+                        <Label Text="{Binding MessageRedefinicao.Text}"
+                               TextColor="{Binding MessageRedefinicao.TextColor}"
+                               FontSize="11"
+                               Padding="5,0,5,0"
+                               FontFamily="PoppinsSemiBold"
+                               HorizontalTextAlignment="Center">
+                            <Label.Shadow>
+                                <Shadow Offset="1,1"
+                                        Brush="#1F1F1F"
+                                        Radius="1"
+                                        Opacity="1" />
+                            </Label.Shadow>
+                        </Label>
+                        <!-- Button confirmar Código -->
+                        <Button Text="Confirmar"
+                                Margin="0,10,0,5"
+                                HorizontalOptions="Center"
+                                IsEnabled="{Binding EstadoButtons}"
+                                BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                cursores:CursorBehavior.Cursor="Hand"
+                                Command="{Binding Btn_CodeConfirmacaoPopup}" />
+                        <!-- Loading -->
+                        <ActivityIndicator Color="white"
+                                           IsRunning="{Binding LoadingCircle}"
+                                           IsVisible="{Binding LoadingCircle}"
+                                           Scale="0.6"
+                                           HorizontalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- POPUP RECUPERAR SENHA P/CRIAR NOVA SENHA -->
+        <Grid IsVisible="{Binding PopupAddNovaSenha}"
+              Style="{StaticResource PopupGridStyle}">
+            <BoxView Style="{StaticResource PopupBoxViewStyle}" />
+            <Frame Style="{StaticResource PopupFrameStyle}"
+                   MaximumHeightRequest="280"
+                   MaximumWidthRequest="350">
+                <StackLayout Style="{StaticResource PopupStackLayoutStyle}">
+                    <Label Style="{StaticResource PopupIconLabelStyle}"
+                           Text="&#xe900;">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Btn_ClosePopups}"
+                                                  CommandParameter="popupnovasenha" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <StackLayout Style="{StaticResource PopupInnerStackLayoutStyle}"
+                                 WidthRequest="220">
+                        <Label Style="{StaticResource PopupTextLabelStyle}"
+                               Text="Alterar senha da conta"
+                               Margin="0,0,0,20" />
+                        <!-- Entrada senha 1 -->
+                        <Entry Keyboard="Plain"
+                               MaxLength="20"
+                               Margin="0,5,0,20"
+                               BackgroundColor="#1F1F1F"
+                               Placeholder="Digite sua nova senha"
+                               Text="{Binding SenhaNova1}"
+                               HorizontalTextAlignment="Center" />
+                        <!-- Entrada senha 2 -->
+                        <Entry Keyboard="Plain"
+                               MaxLength="20"
+                               BackgroundColor="#1F1F1F"
+                               Placeholder="Repita sua nova senha"
+                               Text="{Binding SenhaNova2}"
+                               HorizontalTextAlignment="Center" />
+                        <!-- Menssagem senhas diferentes -->
+                        <Label Text="{Binding MessageRedefinicao.Text}"
+                               TextColor="{Binding MessageRedefinicao.TextColor}"
+                               FontSize="11"
+                               Padding="5,0,5,0"
+                               FontFamily="PoppinsSemiBold"
+                               HorizontalTextAlignment="Center">
+                            <Label.Shadow>
+                                <Shadow Offset="1,1"
+                                        Brush="#1F1F1F"
+                                        Radius="1"
+                                        Opacity="1" />
+                            </Label.Shadow>
+                        </Label>
+                        <!-- Button confirmar mudança de senha -->
+                        <Button Text="Confirmar"
+                                Margin="0,10,0,5"
+                                HorizontalOptions="Center"
+                                IsEnabled="{Binding EstadoButtons}"
+                                BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                cursores:CursorBehavior.Cursor="Hand"
+                                Command="{Binding Btn_NovaSenhaPopup}" />
+                        <!-- Loading -->
+                        <ActivityIndicator Color="white"
+                                           IsRunning="{Binding LoadingCircle}"
+                                           IsVisible="{Binding LoadingCircle}"
+                                           Scale="0.6"
+                                           HorizontalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- ANIMAÇÃO SENHA ALTERADA COM SUCESSO -->
+        <Grid IsVisible="{Binding PopupSucesso}"
+              Style="{StaticResource PopupGridStyle}">
+            <BoxView Style="{StaticResource PopupBoxViewStyle}" />
+            <Frame Style="{StaticResource PopupFrameStyle}"
+                   MaximumHeightRequest="280"
+                   MaximumWidthRequest="350">
+                <Grid RowDefinitions="*,*">
+                    <skia:SKLottieView Grid.Row="0"
+                                       Source="confirmation.json"
+                                       IsAnimationEnabled="{Binding PopupSucesso}"
+                                       Scale="1" />
+                    <StackLayout Grid.Row="1">
+                        <Label Style="{StaticResource PopupTextLabelStyle}"
+                               Text="Sucesso" />
+                        <Label Text="Senha alterada com sucesso!"
+                               FontSize="13"
+                               Margin="0,5,0,0"
+                               TextColor="#8A8A8A"
+                               FontFamily="PoppinsLight"
+                               HorizontalTextAlignment="Center" />
+                        <!-- Button close popup -->
+                        <Button Text="Ok"
+                                Margin="0,20,0,0"
+                                HorizontalOptions="Center"
+                                BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                                cursores:CursorBehavior.Cursor="Hand"
+                                CommandParameter="popupsucesso"
+                                Command="{Binding Btn_ClosePopups }" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </Grid>
+
+        <!-- SEM INTERNET -->
+        <ContentView>
+            <contentview:SemInternetViewModel />
+        </ContentView>
+
+    </Grid>
+</ContentPage>

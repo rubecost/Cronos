@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             x:Class="Cronos.ContentViews.PopupConfirmarSenhaApiClient">
+
+    <Grid IsVisible="{Binding PopupSenha}"
+          Style="{StaticResource PopupGridStyle}">
+        <BoxView Style="{StaticResource PopupBoxViewStyle}" />
+        <Frame Style="{StaticResource PopupFrameStyle}"
+               MaximumHeightRequest="255">
+            <StackLayout Style="{StaticResource PopupStackLayoutStyle}">
+                <Label Style="{StaticResource PopupIconLabelStyle}"
+                       Text="&#xe900;">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Btn_ClosePopups}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <StackLayout Style="{StaticResource PopupInnerStackLayoutStyle}"
+                             HorizontalOptions="Center">
+                    <Label Style="{StaticResource PopupTextLabelStyle}"
+                           Text="Confirmar senha" />
+                    <Label Text="Por favor! confirme sua senha para essa alteração."
+                           FontSize="10"
+                           Margin="0,5,0,20"
+                           TextColor="#8A8A8A"
+                           FontFamily="PoppinsLight"
+                           HorizontalTextAlignment="Center" />
+                    <!-- Entrada da Senha -->
+                    <Entry BackgroundColor="#1F1F1F"
+                           Keyboard="Text"
+                           Placeholder="Insira sua senha"
+                           MaxLength="20"
+                           IsSpellCheckEnabled="false"
+                           WidthRequest="280"
+                           FontFamily="PoppinsRegular"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding Senha}" />
+                    <!-- Menssagem senha incorreta -->
+                    <Label Text="{Binding MensageSenha}"
+                           TextColor="#f14343"
+                           FontSize="11"
+                           Padding="5,0,5,0"
+                           FontFamily="PoppinsSemiBold"
+                           HorizontalTextAlignment="Center">
+                        <Label.Shadow>
+                            <Shadow Offset="1,1"
+                                    Brush="#1F1F1F"
+                                    Radius="1"
+                                    Opacity="1" />
+                        </Label.Shadow>
+                    </Label>
+                    <!-- Button verificar Senha -->
+                    <Button Text="Confirmar"
+                            Margin="0,10,0,5"
+                            HorizontalOptions="Center"
+                            IsEnabled="{Binding EstadoButtons}"
+                            BackgroundColor="{Binding BackgroundBtn.BackgroundColor}"
+                            Command="{Binding Btn_ConfirmarSenha}"
+                            cursores:CursorBehavior.Cursor="Hand" />
+                    <!-- Loading -->
+                    <ActivityIndicator Color="white"
+                                       IsRunning="{Binding LoadingCircle}"
+                                       IsVisible="{Binding LoadingCircle}"
+                                       Scale="0.6" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</ContentView>

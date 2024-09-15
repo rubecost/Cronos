@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:viewmodels="clr-namespace:Cronos.ViewModels"
+             xmlns:services="clr-namespace:Cronos.Services"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             x:Class="Cronos.Views.HistoricoPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:HistoricoViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView >
+                    <StackLayout Margin="20">
+                        <Label Text="Registro Histórico"
+                               FontSize="18"
+                               FontFamily="PoppinsSemiBold"
+                               TextColor="White"
+                               HorizontalTextAlignment="Start"
+                               SemanticProperties.HeadingLevel="Level1" />
+                        <Label Text="Registro Histórico"
+                               FontSize="9"
+                               TextColor="#8A8A8A"
+                               FontFamily="PoppinsLight"
+                               HorizontalTextAlignment="Start" />
+
+                        <Frame BackgroundColor="#252525"
+                               Padding="0"
+                               CornerRadius="2"
+                               Margin="0,10,0,0"
+                               HeightRequest="450"
+                               BorderColor="Transparent">
+                            <Grid>
+                                <BoxView HeightRequest="5"
+                                         VerticalOptions="Start"
+                                         Margin="0,25,0,0"
+                                         Color="#1f1f1f" />
+                                <!-- BUTTONS DE NAVEGAÇÃO -->
+                                <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="Start"
+                                             HorizontalOptions="End"
+                                             Margin="0,5,20,10">
+                                    <!-- Ver resultados anteriores -->
+                                    <Label VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Margin="0,0,10,0"
+                                           Text="&#xe947; Anterior"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_CarregarMaisOuMenosDados}"
+                                                                  CommandParameter="MenosDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <!-- Ver próximos resultados -->
+                                    <Label IsVisible="True"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="End"
+                                           Text="Próximo &#xe946;"
+                                           FontSize="12"
+                                           FontFamily="icons"
+                                           TextColor="#8a8a8a"
+                                           cursores:CursorBehavior.Cursor="Hand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Btn_CarregarMaisOuMenosDados}"
+                                                                  CommandParameter="MaisDados" />
+                                            <PointerGestureRecognizer PointerEntered="BtnMaisMenosDadosEntered"
+                                                                      PointerExited="BtnMaisMenosDadosExited" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                                <ScrollView Orientation="Horizontal"
+                                            HorizontalScrollBarVisibility="Default"
+                                            Margin="20,35,20,20">
+                                    <Grid RowSpacing="10"
+                                          Margin="0,0,0,0"
+                                          ColumnDefinitions="*,*,*,*">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Label Grid.Row="0"
+                                               Grid.Column="0"
+                                               Text="Usuário"
+                                               FontSize="12"
+                                               TextColor="#8A8A8A"
+                                               MinimumWidthRequest="250"
+                                               FontFamily="PoppinsRegular"
+                                               HorizontalTextAlignment="Start" />
+                                        <!--<Label Grid.Row="0"
+                                               Grid.Column="1"
+                                               Text="Setor"
+                                               FontSize="12"
+                                               TextColor="#8A8A8A"
+                                               MinimumWidthRequest="250"
+                                               FontFamily="PoppinsRegular"
+                                               HorizontalTextAlignment="Start" />-->
+                                        <Label Grid.Row="0"
+                                               Grid.Column="1"
+                                               Text="Tipo de Atualização"
+                                               FontSize="12"
+                                               TextColor="#8A8A8A"
+                                               MinimumWidthRequest="250"
+                                               FontFamily="PoppinsRegular"
+                                               HorizontalTextAlignment="Start" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="2"
+                                               Text="Item Atualizado"
+                                               FontSize="12"
+                                               TextColor="#8A8A8A"
+                                               MinimumWidthRequest="250"
+                                               FontFamily="PoppinsRegular"
+                                               HorizontalTextAlignment="Start" />
+                                        <Label Grid.Row="0"
+                                               Grid.Column="3"
+                                               Text="Data e Hora"
+                                               FontSize="12"
+                                               TextColor="#8A8A8A"
+                                               FontFamily="PoppinsRegular"
+                                               MinimumWidthRequest="250"
+                                               HorizontalTextAlignment="Start" />
+                                        <!-- Lista de informações dos equipamentos -->
+                                        <CollectionView Grid.Row="1"
+                                                        Grid.ColumnSpan="5"
+                                                        ItemsSource="{Binding Registros}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid ColumnDefinitions="*,*,*,*"
+                                                          RowSpacing="10">
+                                                        <Frame Grid.Column="0"
+                                                               MinimumWidthRequest="250"
+                                                               Style="{DynamicResource FrameEQPStyle}">
+                                                            <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                   Text="{Binding Email_Usuario}" />
+                                                        </Frame>
+                                                        <!--<Frame Grid.Column="1"
+                                                               MinimumWidthRequest="250"
+                                                               Style="{DynamicResource FrameEQPStyle}">
+                                                            <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                   Text="{Binding Setor}" />
+                                                        </Frame>-->
+                                                        <Frame Grid.Column="1"
+                                                               MinimumWidthRequest="150"
+                                                               Style="{DynamicResource FrameEQPStyle}">
+                                                            <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                   Text="{Binding Tipo_Atualizacao}" />
+                                                        </Frame>
+                                                        <Frame Grid.Column="2"
+                                                               MinimumWidthRequest="200"
+                                                               Style="{DynamicResource FrameEQPStyle}">
+                                                            <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                   Text="{Binding Item_Atualizado}" />
+                                                        </Frame>
+                                                        <Frame Grid.Column="3"
+                                                               MinimumWidthRequest="100"
+                                                               Style="{DynamicResource FrameEQPStyle}">
+                                                            <Label Style="{DynamicResource LabelEQPStyle}"
+                                                                   Text="{Binding Data_Hora}" />
+                                                        </Frame>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </Grid>
+                                </ScrollView>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+
+                <!-- LOADING DA PAGINA -->
+                <ContentView>
+                    <contentview:LoadingViewModel />
+                </ContentView>
+                <!-- SEM INTERNET -->
+                <ContentView>
+                    <contentview:SemInternetViewModel />
+                </ContentView>
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentPage>

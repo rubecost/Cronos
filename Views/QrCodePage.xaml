@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:contentview="clr-namespace:Cronos.ContentViews"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:viewmodel="clr-namespace:Cronos.ViewModels"
+             x:Class="Cronos.Views.QrCodePage">
+    <ContentPage.BindingContext>
+        <viewmodel:QrCodeViewModel />
+    </ContentPage.BindingContext>
+    <Frame Padding="0"
+           CornerRadius="0"
+           BackgroundColor="Transparent"
+           BorderColor="#4B4B4B">
+        <Grid ColumnDefinitions="*"
+              RowDefinitions="auto,*"
+              ColumnSpacing="20"
+              RowSpacing="0">
+            <!-- MENU SUPERIOR -->
+            <ContentView Grid.Row="0">
+                <contentview:MenuTopContentView />
+            </ContentView>
+
+            <Grid Grid.Row="1">
+                <!-- CONTEÚDO-->
+                <ScrollView >
+                    <StackLayout Margin="20">
+                        <Grid ColumnDefinitions="*,*">
+                            <StackLayout Grid.Column="0">
+                                <!-- Exibe Tag Identificação do Equipamento -->
+                                <Label Text="QR Code"
+                                       FontSize="18"
+                                       FontFamily="PoppinsSemiBold"
+                                       TextColor="White"
+                                       HorizontalTextAlignment="Start"
+                                       SemanticProperties.HeadingLevel="Level1" />
+                                <Label Text="{Binding TagDeBusca,StringFormat='Equipamentos / {0} / QR Code'}"
+                                       FontSize="9"
+                                       TextColor="#8A8A8A"
+                                       FontFamily="PoppinsLight"
+                                       HorizontalTextAlignment="Start" />
+                            </StackLayout>
+                            <!-- Button voltar -->
+                            <Label Grid.Column="1"
+                                   Text="&#xe913;"
+                                   FontFamily="icons"
+                                   FontSize="35"
+                                   TextColor="White"
+                                   HorizontalOptions="End"
+                                   VerticalOptions="Start"
+                                   cursores:CursorBehavior.Cursor="Hand">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Btn_Voltar}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                        <Frame BackgroundColor="#F1F1F1"
+                               Padding="0"
+                               BorderColor="Transparent"
+                               CornerRadius="2"
+                               Margin="0,10,0,0">
+                            <Grid Margin="40,40,40,0"
+                                  ColumnDefinitions="auto,*,*"
+                                  RowDefinitions="*,*,*"
+                                  RowSpacing="20">
+                                <Label Grid.Row="0"
+                                       Grid.ColumnSpan="2"
+                                       Text="Simplifique Sua Consulta à&#10;Situação NR-13 do Seu Equipamento."
+                                       FontFamily="PoppinsBold"
+                                       FontSize="18"
+                                       TextColor="#252525" />
+                                <!-- Button Imprimir QR Code -->
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Text="&#xe915;"
+                                       FontFamily="icons"
+                                       FontSize="30"
+                                       TextColor="#252525"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Start"
+                                       ToolTipProperties.Text="Clique para imprimir o QR Code."
+                                       cursores:CursorBehavior.Cursor="Hand">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <!-- Imagem QR CODE -->
+                                <Image Grid.Row="1"
+                                       Grid.Column="0"
+                                       HeightRequest="300"
+                                       WidthRequest="300"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Start">
+                                    <Image.Source>
+                                        <UriImageSource Uri="https://i.postimg.cc/nrMKWW5f/QrCode.png" />
+                                    </Image.Source>
+                                </Image>
+                                <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Margin="40,10,40,0"
+                                       Text="Use este QR Code para acessar rapidamente as informações sobre o status das inspeções NR-13 dos seus equipamentos. Basta imprimir e colar o código no equipamento desejado. Em seguida, aponte a câmera do seu celular para o QR Code e você será redirecionado para a página com as informações atualizadas sobre o status das inspeções."
+                                       FontFamily="PoppinsRegular"
+                                       FontSize="14"
+                                       TextColor="#252525"
+                                       LineHeight="1.8" />
+                                <Label Grid.Row="2"
+                                       Grid.ColumnSpan="2"
+                                       Text="Para utilizar o recurso de QR Code, é necessário contratar o serviço previamente como parte do plano anual. Caso não tenha feito isso, você pode entrar em contato com um especialista da Idealle através dos seguintes meios: E-mail: contato@ideallesp.com.br - Tel: (11) 4280-9111 - Whats: (11) 98172-9359 - Whats: (11) 95959-5787."
+                                       FontFamily="PoppinsRegular"
+                                       FontSize="9"
+                                       Margin="0,0,0,40"
+                                       TextColor="#252525" />
+                                <Label Grid.Row="1"
+                                       Grid.Column="2"
+                                       Grid.RowSpan="2"
+                                       Text="&#xe914;"
+                                       FontFamily="icons"
+                                       FontSize="325"
+                                       Margin="0,0,0,-20"
+                                       TextColor="#252525"
+                                       HorizontalTextAlignment="End"
+                                       VerticalTextAlignment="End" />
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView> 
+                </Grid> 
+            </Grid> 
+        </Frame> 
+</ContentPage>

@@ -1,0 +1,401 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             xmlns:cursores="clr-namespace:Cronos.Platforms.Windows"
+             xmlns:local="clr-namespace:Cronos"
+             x:Class="Cronos.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Style Popup de Senha Padrão -->
+            <Style x:Key="PopupGridStyle"
+                   TargetType="Grid">
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+            </Style>
+            <Style x:Key="PopupBoxViewStyle"
+                   TargetType="BoxView">
+                <Setter Property="Color"
+                        Value="#1F1F1F" />
+                <Setter Property="Opacity"
+                        Value="0.9" />
+            </Style>
+            <Style x:Key="PopupFrameStyle"
+                   TargetType="Frame">
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="BackgroundColor"
+                        Value="#252525" />
+                <Setter Property="BorderColor"
+                        Value="#8E8E8E" />
+                <Setter Property="CornerRadius"
+                        Value="2" />
+                <Setter Property="MaximumWidthRequest"
+                        Value="400" />
+                <Setter Property="MaximumHeightRequest"
+                        Value="250" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+            <Style x:Key="PopupStackLayoutStyle"
+                   TargetType="StackLayout">
+                <Setter Property="Margin"
+                        Value="10" />
+            </Style>
+            <Style x:Key="PopupIconLabelStyle"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="FontFamily"
+                        Value="icons" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="HorizontalOptions"
+                        Value="End" />
+                <Setter Property="VerticalOptions"
+                        Value="Start" />
+                <Setter Property="cursores:CursorBehavior.Cursor"
+                        Value="Hand" />
+            </Style>
+            <Style x:Key="PopupInnerStackLayoutStyle"
+                   TargetType="StackLayout">
+                <Setter Property="Margin"
+                        Value="20,10,20,20" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+            <Style x:Key="PopupTextLabelStyle"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="18" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsSemiBold" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+            </Style>
+            <Style x:Key="PopupInnerFrameStyle"
+                   TargetType="Frame">
+                <Setter Property="Padding"
+                        Value="-5" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="BorderColor"
+                        Value="#8E8E8E" />
+                <Setter Property="CornerRadius"
+                        Value="3" />
+                <Setter Property="Margin"
+                        Value="0,20,0,30" />
+                <Setter Property="MaximumWidthRequest"
+                        Value="330" />
+            </Style>
+            <Style x:Key="PopupEntryStyle"
+                   TargetType="Entry">
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="PlaceholderColor"
+                        Value="#8E8E8E" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="MaxLength"
+                        Value="200" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsRegular" />
+                <Setter Property="FontSize"
+                        Value="12" />
+            </Style>
+            <!-- Fim Style -->
+
+            <!-- Style Entry personalizado para senha com icon olho -->
+            <Style x:Key="PasswordFrameStyle"
+                   TargetType="Frame">
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="BorderColor"
+                        Value="#8E8E8E" />
+                <Setter Property="CornerRadius"
+                        Value="3" />
+            </Style>
+            <Style x:Key="PasswordEntryStyle"
+                   TargetType="Entry">
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="Keyboard"
+                        Value="Text" />
+                <Setter Property="IsPassword"
+                        Value="True" />
+                <Setter Property="MaxLength"
+                        Value="20" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsRegular" />
+            </Style>
+            <Style x:Key="PasswordIconStyle"
+                   TargetType="Label">
+                <Setter Property="FontFamily"
+                        Value="icons" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="15" />
+                <Setter Property="Margin"
+                        Value="0,0,15,0" />
+                <Setter Property="HorizontalOptions"
+                        Value="End" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+                <Setter Property="cursores:CursorBehavior.Cursor"
+                        Value="Hand" />
+            </Style>
+            <!-- Fim Style -->
+
+            <!-- Style Buttons Icons Menu Lateral -->
+            <Style TargetType="Grid"
+                   x:Key="BtnMenuLatGrid">
+                <Setter Property="Margin"
+                        Value="0,10,0,10" />
+            </Style>
+            <Style TargetType="Label"
+                   x:Key="BtnMenuLatLabel">
+                <Setter Property="FontSize"
+                        Value="30" />
+                <Setter Property="FontFamily"
+                        Value="icons" />
+                <Setter Property="TextColor"
+                        Value="#8A8A8A" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center" />
+            </Style>
+            <Style TargetType="BoxView"
+                   x:Key="BtnMenuLatBoxViewLinha">
+                <Setter Property="Color"
+                        Value="White" />
+                <Setter Property="WidthRequest"
+                        Value="7" />
+                <Setter Property="HeightRequest"
+                        Value="30" />
+                <Setter Property="CornerRadius"
+                        Value="20" />
+                <Setter Property="HorizontalOptions"
+                        Value="End" />
+                <Setter Property="Margin"
+                        Value="0,5,0,5" />
+            </Style>
+            <!-- Fim Style -->
+
+            <!-- Style para o Frame com Entry -->
+            <Style TargetType="Frame"
+                   x:Key="FrameEQPStyle">
+                <Setter Property="CornerRadius"
+                        Value="0" />
+                <Setter Property="Padding"
+                        Value="10,0,10,0" />
+                <Setter Property="Margin"
+                        Value="0,2,0,2" />
+                <Setter Property="HeightRequest"
+                        Value="30" />
+                <Setter Property="BorderColor"
+                        Value="Transparent" />
+                <Setter Property="BackgroundColor"
+                        Value="#1F1F1F" />
+            </Style>
+            <Style TargetType="Label"
+                   x:Key="LabelEQPStyle">
+                <Setter Property="FontSize"
+                        Value="11" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsRegular" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Start" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+            <!-- Fim Style -->
+
+            <!-- Style buttons inferirores que exibi mais resultados ou menos -->
+            <Style x:Key="NavigationStackLayoutStyle"
+                   TargetType="StackLayout">
+                <Setter Property="Orientation"
+                        Value="Horizontal" />
+                <Setter Property="VerticalOptions"
+                        Value="End" />
+                <Setter Property="HorizontalOptions"
+                        Value="End" />
+            </Style>
+            <Style x:Key="NavigationLabelStyle"
+                   TargetType="Label">
+                <Setter Property="IsVisible"
+                        Value="True" />
+                <Setter Property="VerticalOptions"
+                        Value="End" />
+                <Setter Property="HorizontalOptions"
+                        Value="End" />
+                <Setter Property="Margin"
+                        Value="0,0,10,0" />
+            </Style>
+            <Style x:Key="FormattedSpanIconStyle"
+                   TargetType="Span">
+                <Setter Property="FontSize"
+                        Value="11" />
+                <Setter Property="FontFamily"
+                        Value="icons" />
+                <Setter Property="TextColor"
+                        Value="White" />
+            </Style>
+            <Style x:Key="FormattedSpanTextStyle"
+                   TargetType="Span">
+                <Setter Property="FontSize"
+                        Value="12" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsRegular" />
+                <Setter Property="TextColor"
+                        Value="White" />
+            </Style>
+            <!-- Fim Style -->
+
+            <!-- Styles Sem Internet -->
+            <Style x:Key="BoxViewStyle"
+                   TargetType="BoxView">
+                <Setter Property="Color"
+                        Value="#1F1F1F" />
+                <Setter Property="Opacity"
+                        Value="0.9" />
+            </Style>
+            <Style x:Key="LottieViewStyle"
+                   TargetType="skia:SKLottieView">
+                <Setter Property="Margin"
+                        Value="0,-150,0,0" />
+                <Setter Property="Source"
+                        Value="nowifi.json" />
+                <Setter Property="IsAnimationEnabled"
+                        Value="True" />
+                <Setter Property="RepeatCount"
+                        Value="-1" />
+                <Setter Property="RepeatMode"
+                        Value="Restart" />
+                <Setter Property="Scale"
+                        Value="1" />
+                <Setter Property="MaximumHeightRequest"
+                        Value="250" />
+            </Style>
+            <Style x:Key="LabelTitleStyle"
+                   TargetType="Label">
+                <Setter Property="Text"
+                        Value="Conecte-se à Internet" />
+                <Setter Property="FontSize"
+                        Value="18" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsSemiBold" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+            </Style>
+            <Style x:Key="LabelSubtitleStyle"
+                   TargetType="Label">
+                <Setter Property="Text"
+                        Value="Você está off-line. Verifique sua conexão." />
+                <Setter Property="FontSize"
+                        Value="13" />
+                <Setter Property="Margin"
+                        Value="0,5,0,0" />
+                <Setter Property="TextColor"
+                        Value="#8A8A8A" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsLight" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+            </Style>
+            <Style x:Key="ButtonStyle"
+                   TargetType="Button">
+                <Setter Property="Text"
+                        Value="Tentar Novamente" />
+                <Setter Property="Margin"
+                        Value="0,20,0,0" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="cursores:CursorBehavior.Cursor"
+                        Value="Hand" />
+            </Style>
+            <!-- Fim style-->
+
+            <!-- Relatórios Digitais Pg/RegistrarInfoEqp -->
+            <Style x:Key="LabelRelatorioStyle"
+                   TargetType="Label">
+                <Setter Property="FontFamily"
+                        Value="PoppinsRegular" />
+                <Setter Property="TextColor"
+                        Value="#8A8A8A" />
+                <Setter Property="Margin"
+                        Value="0,0,0,0" />
+            </Style>
+
+            <Style x:Key="LabelRelatorioStyle2"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="10" />
+                <Setter Property="Margin"
+                        Value="5,10,0,10" />
+                <Setter Property="FontAttributes"
+                        Value="Italic" />
+                <Setter Property="FontFamily"
+                        Value="PoppinsRegular" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="Margin"
+                        Value="0,0,0,0" />
+            </Style>
+            <Style x:Key="EntryRelatorioStyle"
+                   TargetType="Entry">
+                <Setter Property="MaxLength"
+                        Value="50" />
+                <Setter Property="Keyboard"
+                        Value="Text" />
+                <Setter Property="BackgroundColor"
+                        Value="#1F1F1F" />
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="Placeholder"
+                        Value="Insira o nome do relatório*" />
+            </Style>
+            <Style x:Key="EditorRelatorioStyle"
+                   TargetType="Editor">
+                <Setter Property="MaxLength"
+                        Value="200" />
+                <Setter Property="HeightRequest"
+                        Value="100" />
+                <Setter Property="Keyboard"
+                        Value="Text" />
+                <Setter Property="TextColor"
+                        Value="White" />
+                <Setter Property="BackgroundColor"
+                        Value="#1F1F1F" />
+                <Setter Property="PlaceholderColor"
+                        Value="#8E8E8E" />
+                <Setter Property="Margin"
+                        Value="0,10,0,10" />
+                <Setter Property="Placeholder"
+                        Value="Insira uma descrição para esse relatório" />
+            </Style>
+            <!--Fim Style-->
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
